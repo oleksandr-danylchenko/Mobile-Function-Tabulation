@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
+    "@julr/vite-plugin-validate-env": "^0.2.2",
     "@swc/plugin-emotion": "^2.5.67",
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.7",
