@@ -33,6 +33,7 @@
     "src",
     "vite.config.ts",
     "env.ts",
+    "capacitor.config.ts",
     ".eslintrc.js"
   ],
   "exclude": [
