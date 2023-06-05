@@ -1,18 +1,16 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { FC } from 'react';
+import { Route } from 'react-router-dom';
 
-import Login from '@/pages/Auth/Login';
-import Register from '@/pages/Auth/Register';
+import { IonContent, IonRouterOutlet } from '@ionic/react';
+
 import Home from '@/pages/Home/Home';
 
-const Routing = () => {
-  return (
-    <Routes>
-      <Route path="*" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
-  );
-};
+const Routing: FC = () => (
+  <IonContent>
+    <IonRouterOutlet>
+      <Route render={Home} />
+    </IonRouterOutlet>
+  </IonContent>
+);
 
 export default Routing;
