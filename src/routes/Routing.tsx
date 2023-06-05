@@ -1,18 +1,13 @@
-import { FC } from 'react';
-import { Route } from 'react-router-dom';
-
-import { IonRouterOutlet } from '@ionic/react';
-import { Container } from '@mui/material';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import Home from '@/pages/Home/Home';
 
-const Routing: FC = () => {
+const Routing = () => {
   return (
-    <Container sx={{ py: 2, position: 'relative' }}>
-      <IonRouterOutlet>
-        <Route render={Home} />
-      </IonRouterOutlet>
-    </Container>
+    <Routes>
+      <Route element={<Home />} />
+    </Routes>
   );
 };
 

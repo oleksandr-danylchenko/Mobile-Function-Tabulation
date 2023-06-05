@@ -1,21 +1,16 @@
-import { FC } from 'react';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import { IonApp, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
 import { CssBaseline } from '@mui/material';
 
 import Routing from './routes/Routing';
 
-setupIonicReact();
-
-const App: FC = () => {
+const App = () => {
   return (
-    <IonApp>
-      <IonReactRouter>
-        <CssBaseline />
-        <Routing />
-      </IonReactRouter>
-    </IonApp>
+    <BrowserRouter>
+      <CssBaseline />
+      <Routing />
+    </BrowserRouter>
   );
 };
 
