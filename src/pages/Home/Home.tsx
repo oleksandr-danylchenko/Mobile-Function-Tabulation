@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Typography, Stack, Container, css } from '@mui/material';
+import { Typography, Stack, css } from '@mui/material';
 
 import Counter from '@/components/Counter/Counter';
 
