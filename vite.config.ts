@@ -4,7 +4,12 @@ import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxImportSource: '@emotion/react',
+      plugins: [['@swc/plugin-emotion', { sourceMap: true }]],
+    }),
+  ],
   build: {},
   resolve: {
     alias: {
