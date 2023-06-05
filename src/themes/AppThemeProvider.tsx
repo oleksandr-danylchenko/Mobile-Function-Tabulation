@@ -1,7 +1,13 @@
-import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
-import { useAppSelector } from '@/app/store';
-import { PaletteMode } from '@mui/material';
 import * as React from 'react';
+
+import { PaletteMode } from '@mui/material';
+import {
+  ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+} from '@mui/material/styles';
+
+import { useAppSelector } from '@/app/store';
 type Props = {
   children?: React.ReactNode;
 };

@@ -1,7 +1,9 @@
 import React from 'react';
-import TemplateTester from '@/components/TemplateTester/TemplateTester';
+
 import { Typography, Stack, Container } from '@mui/material';
+
 import Counter from '@/components/Counter/Counter';
+import TemplateTester from '@/components/TemplateTester/TemplateTester';
 
 const Home = () => {
   return (

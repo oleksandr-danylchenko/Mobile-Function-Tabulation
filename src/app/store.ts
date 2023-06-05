@@ -1,8 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { apiSlice } from './api/apiSlice';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import userReducer from '@/features/user/userSlice';
+
+import { configureStore } from '@reduxjs/toolkit';
+
+import { apiSlice } from './api/apiSlice';
+
 import { counterReducer } from '@/features/counterSlice';
+import userReducer from '@/features/user/userSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,7 +14,8 @@ const store = configureStore({
     counter: counterReducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,8 +1,19 @@
 import React from 'react';
-import { changeMode } from '@/features/user/userSlice';
-import { Stack, Box, Typography, IconButton, TypographyVariant, SxProps, Theme } from '@mui/material';
+
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+import {
+  Stack,
+  Box,
+  Typography,
+  IconButton,
+  TypographyVariant,
+  SxProps,
+  Theme,
+} from '@mui/material';
+
 import { useAppDispatch, useAppSelector } from '@/app/store';
+import { changeMode } from '@/features/user/userSlice';
+
 const TemplateTester = () => {
   const dispatch = useAppDispatch();
   const mode = useAppSelector((state) => state.user.mode);
@@ -93,7 +104,10 @@ const TemplateTester = () => {
       gap={2}
     >
       <Typography variant="h3">{type}</Typography> {func}
-      <IconButton onClick={() => dispatch(changeMode())} sx={{ position: 'absolute', top: 10, right: 10 }}>
+      <IconButton
+        onClick={() => dispatch(changeMode())}
+        sx={{ position: 'absolute', top: 10, right: 10 }}
+      >
         <Brightness4Icon
           sx={{
             transition: 'transform 0.4s',
@@ -122,7 +136,10 @@ const TemplateTester = () => {
                   p: 0.65,
                   '& p': {
                     fontSize: { xs: 10, sm: 14, md: 16 },
-                    textShadow: mode === 'dark' ? '0px 0px 10px #000' : '0px 0px 10px #fff',
+                    textShadow:
+                      mode === 'dark'
+                        ? '0px 0px 10px #000'
+                        : '0px 0px 10px #fff',
                   },
                 } as SxProps
               }

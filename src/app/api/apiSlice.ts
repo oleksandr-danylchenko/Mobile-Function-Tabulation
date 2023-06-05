@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  BaseQueryApi,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
+
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
@@ -15,7 +21,11 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithReauth = async (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}) => {
+const baseQueryWithReauth = async (
+  args: string | FetchArgs,
+  api: BaseQueryApi,
+  extraOptions: {},
+) => {
   const result = await baseQuery(args, api, extraOptions);
   // === 401 Unauthorized === //
   // TODO: Refresh token operations

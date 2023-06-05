@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { Box, Button, Stack } from '@mui/material';
-import { decrement, increment } from '@/features/counterSlice';
+
 import { useAppDispatch, useAppSelector } from '@/app/store';
+import { decrement, increment } from '@/features/counterSlice';
 
 const Counter = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +28,11 @@ const Counter = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Button variant="contained" aria-label="Decrement value" onClick={() => dispatch(decrement(1))}>
+      <Button
+        variant="contained"
+        aria-label="Decrement value"
+        onClick={() => dispatch(decrement(1))}
+      >
         -
       </Button>
       <Box
