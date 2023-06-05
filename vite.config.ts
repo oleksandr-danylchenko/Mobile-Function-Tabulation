@@ -10,7 +10,7 @@ export default defineConfig({
       jsxImportSource: '@emotion/react',
       plugins: [['@swc/plugin-emotion', { sourceMap: true }]],
     }),
-    ValidateEnv(),
+    ValidateEnv({}),
   ],
   build: {},
   resolve: {
