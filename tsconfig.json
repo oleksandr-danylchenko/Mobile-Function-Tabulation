@@ -29,17 +29,14 @@
     }
   },
   "include": [
-    "src"
+    "src",
+    "vite.config.ts",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules",
     "**/node_modules/*",
     "dist",
     "**/dist/*"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
   ]
 }
