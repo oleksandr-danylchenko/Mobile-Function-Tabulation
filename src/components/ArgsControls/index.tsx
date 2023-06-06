@@ -1,20 +1,20 @@
 import { FC } from 'react';
 
 import {
-  TextField,
-  Stack,
   FormControl,
   InputLabel,
-  Select,
   MenuItem,
+  Select,
+  Stack,
+  TextField,
 } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select/SelectInput';
 
-import { decrement, increment } from '@/store/slices/counterSlice';
-import { useAppDispatch } from '@/store/store';
+import { FunctionKey, functionOptions } from '@/fixtures/functions';
+import { setFunc } from '@/store/slices/tabulationSlice';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const ArgsControls: FC = () => {
-  const dispatch = useAppDispatch();
-
   return (
     <Stack
       gap={2}
@@ -31,19 +31,28 @@ const ArgsControls: FC = () => {
 };
 
 const FunctionSelector: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const funcKey = useAppSelector((state) => state.tabulation.funcKey);
+
+  const handleChange = (event: SelectChangeEvent<FunctionKey>): void =>
+    void dispatch(setFunc(event.target.value as FunctionKey));
+
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl sx={{ minWidth: 130 }} size="small">
       <InputLabel id="select-formula-label">Formula</InputLabel>
       <Select
         labelId="select-formula-label"
         id="demo-select-small"
-        value={1}
-        label="Function"
+        value={funcKey}
+        label="Formula"
+        onChange={handleChange}
       >
-        <MenuItem value={1}>
-          x<sup>2</sup>
-        </MenuItem>
-        <MenuItem value={1}>1/x</MenuItem>
+        {functionOptions.map((option) => (
+          <MenuItem key={option.key} value={option.key}>
+            {option.label}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

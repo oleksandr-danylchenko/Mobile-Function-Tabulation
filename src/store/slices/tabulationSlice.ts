@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FunctionKey } from '@/fixtures/functions';
+import {
+  FunctionKey,
+  FunctionOption,
+  functionsOptions,
+} from '@/fixtures/functions';
+import type { RootState } from '@/store/store';
 
 interface TabulationState {
   funcKey: FunctionKey;
@@ -33,3 +38,6 @@ const tabulationSlice = createSlice({
 export const tabulationReducer = tabulationSlice.reducer;
 
 export const { setFunc, setXStart, setXEnd } = tabulationSlice.actions;
+
+export const selectFunctionOption = (state: RootState): FunctionOption =>
+  functionsOptions[state.tabulation.funcKey]!;

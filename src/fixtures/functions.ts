@@ -11,10 +11,10 @@ export interface FunctionOption {
   readonly execute: (x: number) => number;
 }
 
-const functionOptions: Array<FunctionOption> = [
+export const functionOptions: Array<FunctionOption> = [
   {
     key: FunctionKey.X_SQUARED,
-    label: 'x<sup>2</sup>',
+    label: 'x^2',
     execute: (x) => x ** 2,
   },
   {
