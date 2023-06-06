@@ -12,7 +12,7 @@ import {
 import { SelectChangeEvent } from '@mui/material/Select/SelectInput';
 
 import { FunctionKey, functionOptions } from '@/fixtures/functions';
-import { setFunc, setXStart, setXEnd } from '@/store/slices/tabulationSlice';
+import { setFunc, setX } from '@/store/slices/tabulationSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const ArgsControls: FC = () => {
@@ -21,13 +21,8 @@ const ArgsControls: FC = () => {
   const handleXChange = useCallback(
     (prop: 'xStart' | 'xEnd') =>
       debounce((event: ChangeEvent<HTMLInputElement>): void => {
-        const value = Number(event.target.value);
-
-        if (prop === 'xStart') {
-          dispatch(setXStart(value));
-        } else {
-          dispatch(setXEnd(value));
-        }
+        const value = event.target.value;
+        dispatch(setX(prop === 'xStart' ? { start: value } : { end: value }));
       }, 250),
     [dispatch],
   );
@@ -49,6 +44,7 @@ const ArgsControls: FC = () => {
         onChange={handleXChange('xStart')}
       />
       <TextField
+        error
         label="X end"
         defaultValue="1"
         size="small"
