@@ -1,11 +1,11 @@
-import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { counterReducer } from '@/store/slices/counterSlice';
+import { tabulationReducer } from '@/store/slices/tabulationSlice';
 
 const store = configureStore({
-  reducer: { counter: counterReducer },
+  reducer: { tabulation: tabulationReducer },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
