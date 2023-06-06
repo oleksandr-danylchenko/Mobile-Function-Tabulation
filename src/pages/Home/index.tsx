@@ -2,13 +2,16 @@ import { FC } from 'react';
 
 import { Stack, Typography, Box } from '@mui/material';
 
+import ArgsControls from '@/components/ArgsControls';
+
 const Home: FC = () => {
   return (
-    <Stack gap={1} my={2}>
+    <Stack height="100vh" py={2} gap={1}>
       <Typography textAlign="center" variant="h2">
         Function tabulation
       </Typography>
-      <Box height="90%"></Box>
+      <Box flex={1} sx={{ backgroundColor: 'wheat' }} />
+      <ArgsControls />
     </Stack>
   );
 };

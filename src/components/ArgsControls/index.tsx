@@ -1,65 +1,52 @@
 import { FC } from 'react';
 
-import { Box, Button, Stack } from '@mui/material';
+import {
+  TextField,
+  Stack,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
 import { decrement, increment } from '@/store/slices/counterSlice';
-import { useAppDispatch, useAppSelector } from '@/store/store';
+import { useAppDispatch } from '@/store/store';
 
-const Counter: FC = () => {
+const ArgsControls: FC = () => {
   const dispatch = useAppDispatch();
-  const count = useAppSelector((state) => state.counter.count);
 
   return (
     <Stack
-      sx={{
-        width: '100%',
-        backgroundColor: 'grey.100',
-        boxShadow: 1,
-        mt: 2,
-        p: 2,
-        borderRadius: 8,
-        fontSize: 20,
-        button: {
-          fontSize: 20,
-        },
-      }}
       gap={2}
       direction="row"
       alignItems="center"
       justifyContent="center"
+      px={2}
     >
-      <Button
-        variant="contained"
-        aria-label="Decrement value"
-        onClick={() => dispatch(decrement(1))}
-      >
-        -
-      </Button>
-      <Box
-        sx={{
-          borderRadius: 1,
-          backgroundColor: 'grey.200',
-          boxShadow: 3,
-          p: 1,
-          height: 47,
-          minWidth: 47,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {count}{' '}
-      </Box>
-      <Button
-        variant="contained"
-        sx={{ backgroundColor: 'primary.main' }}
-        aria-label="Increment value"
-        onClick={() => dispatch(increment(1))}
-      >
-        +
-      </Button>
+      <FunctionSelector />
+      <TextField label="X start" defaultValue="-1" size="small" />{' '}
+      <TextField label="X end" defaultValue="-1" size="small" />
     </Stack>
   );
 };
 
-export default Counter;
+const FunctionSelector: FC = () => {
+  return (
+    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="select-formula-label">Formula</InputLabel>
+      <Select
+        labelId="select-formula-label"
+        id="demo-select-small"
+        value={1}
+        label="Function"
+      >
+        <MenuItem value={1}>
+          x<sup>2</sup>
+        </MenuItem>
+        <MenuItem value={1}>1/x</MenuItem>
+      </Select>
+    </FormControl>
+  );
+};
+
+export default ArgsControls;
