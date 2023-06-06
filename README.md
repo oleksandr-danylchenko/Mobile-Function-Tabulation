@@ -31,7 +31,7 @@ pnpm dev
 #### Paths
 
 Application using absolute paths
-Example: '@/components/Counter/Counter';
+Example: '@/components/Index/Index';
 
 if you don't want to use you can remove these lines from
 

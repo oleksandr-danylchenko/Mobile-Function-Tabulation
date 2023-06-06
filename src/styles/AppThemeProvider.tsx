@@ -7,7 +7,6 @@ import {
   responsiveFontSizes,
 } from '@mui/material/styles';
 
-import { useAppSelector } from '@/app/store';
 type Props = {
   children?: React.ReactNode;
 };

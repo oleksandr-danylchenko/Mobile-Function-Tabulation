@@ -2,7 +2,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { counterReducer } from '@/app/slices/counterSlice';
+import { counterReducer } from '@/store/slices/counterSlice';
 
 const store = configureStore({
   reducer: { counter: counterReducer },

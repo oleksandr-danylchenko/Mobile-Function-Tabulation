@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { CssBaseline } from '@mui/material';
 
-import Routing from './routes/Routing';
+import Routing from '@/routing/Routing';
 
 const App = () => {
   return (

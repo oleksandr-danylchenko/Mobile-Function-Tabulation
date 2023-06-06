@@ -1,9 +1,11 @@
+import { FC } from 'react';
+
 import { Box, Button, Stack } from '@mui/material';
 
-import { decrement, increment } from '@/app/slices/counterSlice';
-import { useAppDispatch, useAppSelector } from '@/app/store';
+import { decrement, increment } from '@/store/slices/counterSlice';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
-const Counter = () => {
+const Counter: FC = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector((state) => state.counter.count);
 
