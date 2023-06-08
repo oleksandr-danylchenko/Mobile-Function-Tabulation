@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback } from 'react';
+import { FC } from 'react';
 import {
   FormContainer,
   SelectElement,
@@ -7,35 +7,32 @@ import {
 } from 'react-hook-form-mui';
 
 import { ClassNames, css } from '@emotion/react';
-import { debounce } from '@mui/material';
 
-import { FunctionKey, functionOptions } from '@/fixtures/functions';
-import { setX } from '@/store/slices/tabulationSlice';
-import { useAppDispatch } from '@/store/store';
+import { functionOptions } from '@/fixtures/functions';
+import {
+  selectArgsControls,
+  setTabulationArgs,
+  TabulationState,
+} from '@/store/slices/tabulationSlice';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
-interface ArgsControlsProps {
-  xStart: string;
-  xEnd: string;
-  funcKey: FunctionKey;
-}
+export type ArgsControlsForm = Pick<
+  TabulationState,
+  'xStart' | 'xEnd' | 'funcKey'
+>;
 
 const ArgsControls: FC = () => {
   const dispatch = useAppDispatch();
+  const argsControls = useAppSelector(selectArgsControls);
 
-  const argsFormContext = useForm<ArgsControlsProps>({
-    defaultValues: { xStart: '-1', xEnd: '1', funcKey: FunctionKey.X_SQUARED },
+  const argsFormContext = useForm<ArgsControlsForm>({
+    defaultValues: argsControls,
     mode: 'onBlur',
   });
-  const { watch } = argsFormContext;
-
-  const handleXChange = useCallback(
-    (prop: 'xStart' | 'xEnd') =>
-      debounce((event: ChangeEvent<HTMLInputElement>): void => {
-        const value = event.target.value;
-        dispatch(setX(prop === 'xStart' ? { start: value } : { end: value }));
-      }, 250),
-    [dispatch],
-  );
+  const { handleSubmit } = argsFormContext;
+  const handleFormBlur = (data: ArgsControlsForm): void => {
+    dispatch(setTabulationArgs(data));
+  };
 
   return (
     <ClassNames>
@@ -43,6 +40,7 @@ const ArgsControls: FC = () => {
         <FormContainer
           formContext={argsFormContext}
           FormProps={{
+            onBlur: handleSubmit(handleFormBlur), // Sends even only after successful validation
             className: css`
               display: flex;
               align-items: center;
@@ -71,7 +69,6 @@ const ArgsControls: FC = () => {
             css={inputStyle}
             name="xStart"
             label="X start"
-            defaultValue="-1"
             size="small"
             type="number"
             required
@@ -80,7 +77,6 @@ const ArgsControls: FC = () => {
             css={inputStyle}
             name="xEnd"
             label="X end"
-            defaultValue="1"
             size="small"
             type="number"
             required
