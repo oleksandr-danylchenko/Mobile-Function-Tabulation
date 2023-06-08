@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { Stack, Avatar, IconButton, Modal, Typography } from '@mui/material';
 import { useToggle } from 'usehooks-ts';
 
@@ -11,7 +12,7 @@ const authorData = {
 };
 
 const AuthorModal: FC = () => {
-  const [open, toggleOpen] = useToggle(true);
+  const [open, toggleOpen] = useToggle(false);
 
   return (
     <>
@@ -40,11 +41,24 @@ const AuthorModal: FC = () => {
             gap={2.5}
             p={3}
             sx={{
+              position: 'relative',
               backgroundColor: 'primary.light',
               borderRadius: 10,
               lineHeight: 1.6,
             }}
           >
+            <IconButton
+              aria-label="Hide author info"
+              sx={{
+                position: 'absolute',
+                right: 12,
+                top: 10,
+              }}
+              color="inherit"
+              onClick={toggleOpen}
+            >
+              <CancelIcon />
+            </IconButton>
             <Avatar
               alt={authorData.name}
               src={authorData.avatarUrl}

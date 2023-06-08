@@ -62,6 +62,13 @@ export const AppThemeProvider: React.FC<Props> = ({ children }) => {
             },
           },
         },
+        MuiModal: {
+          styleOverrides: {
+            backdrop: {
+              backdropFilter: 'blur(4px)',
+            },
+          },
+        },
         MuiIconButton: {
           styleOverrides: {
             root: {
