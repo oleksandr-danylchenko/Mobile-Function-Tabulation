@@ -36,10 +36,8 @@ export const AppThemeProvider: React.FC<Props> = ({ children }) => {
     createTheme({
       palette: {
         primary: {
-          main: '#DD3333',
-        },
-        secondary: {
-          main: '#222489',
+          main: '#90caf9',
+          light: '#e3f2fd',
         },
         gradient: {
           bronze: 'linear-gradient(180deg, #9C6D3E 0%, #E8C8A9 100%)',
@@ -51,13 +49,6 @@ export const AppThemeProvider: React.FC<Props> = ({ children }) => {
         fontFamily: 'Lato, sans-serif',
       },
       components: {
-        MuiCssBaseline: {
-          styleOverrides: {
-            body: {
-              // ---CSS BODY--- \\
-            },
-          },
-        },
         MuiLink: {
           styleOverrides: {
             root: {
