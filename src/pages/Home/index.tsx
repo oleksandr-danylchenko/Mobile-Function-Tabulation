@@ -3,11 +3,13 @@ import { FC } from 'react';
 import { Stack, Box } from '@mui/material';
 
 import ArgsControls from '@/components/ArgsControls';
+import AuthorModal from '@/components/AuthorModal';
 
 const Home: FC = () => {
   return (
     <Stack height="100vh" pb={2} gap={2}>
-      <Box flex={1} sx={{ backgroundColor: 'wheat' }} />
+      <AuthorModal />
+      <Box flex={1} sx={{ backgroundColor: 'white' }} />
       <ArgsControls />
     </Stack>
   );
