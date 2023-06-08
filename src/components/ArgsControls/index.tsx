@@ -33,7 +33,12 @@ const ArgsControls: FC = () => {
       direction="row"
       alignItems="center"
       justifyContent="center"
-      px={2}
+      p={2}
+      sx={{
+        backgroundColor: 'primary.light',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+      }}
     >
       <FunctionSelector />
       <TextField
@@ -44,7 +49,6 @@ const ArgsControls: FC = () => {
         onChange={handleXChange('xStart')}
       />
       <TextField
-        error
         label="X end"
         defaultValue="1"
         size="small"

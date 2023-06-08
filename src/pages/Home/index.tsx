@@ -7,7 +7,7 @@ import AuthorModal from '@/components/AuthorModal';
 
 const Home: FC = () => {
   return (
-    <Stack height="100vh" pb={2} gap={2}>
+    <Stack height="100vh" gap={2}>
       <AuthorModal />
       <Box flex={1} sx={{ backgroundColor: 'white' }} />
       <ArgsControls />
