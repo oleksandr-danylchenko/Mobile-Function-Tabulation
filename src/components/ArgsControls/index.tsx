@@ -1,22 +1,32 @@
 import { ChangeEvent, FC, useCallback } from 'react';
-
 import {
-  debounce,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select/SelectInput';
+  FormContainer,
+  SelectElement,
+  TextFieldElement,
+  useForm,
+} from 'react-hook-form-mui';
+
+import { ClassNames, css } from '@emotion/react';
+import { debounce } from '@mui/material';
 
 import { FunctionKey, functionOptions } from '@/fixtures/functions';
-import { setFunc, setX } from '@/store/slices/tabulationSlice';
-import { useAppDispatch, useAppSelector } from '@/store/store';
+import { setX } from '@/store/slices/tabulationSlice';
+import { useAppDispatch } from '@/store/store';
+
+interface ArgsControlsProps {
+  xStart: string;
+  xEnd: string;
+  funcKey: FunctionKey;
+}
 
 const ArgsControls: FC = () => {
   const dispatch = useAppDispatch();
+
+  const argsFormContext = useForm<ArgsControlsProps>({
+    defaultValues: { xStart: '-1', xEnd: '1', funcKey: FunctionKey.X_SQUARED },
+    mode: 'onBlur',
+  });
+  const { watch } = argsFormContext;
 
   const handleXChange = useCallback(
     (prop: 'xStart' | 'xEnd') =>
@@ -28,63 +38,68 @@ const ArgsControls: FC = () => {
   );
 
   return (
-    <Stack
-      gap={2}
-      direction="row"
-      alignItems="center"
-      justifyContent="center"
-      p={2}
-      sx={{
-        backgroundColor: 'primary.light',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-      }}
-    >
-      <FunctionSelector />
-      <TextField
-        label="X start"
-        defaultValue="-1"
-        size="small"
-        type="number"
-        onChange={handleXChange('xStart')}
-      />
-      <TextField
-        label="X end"
-        defaultValue="1"
-        size="small"
-        type="number"
-        onChange={handleXChange('xEnd')}
-      />
-    </Stack>
+    <ClassNames>
+      {({ css, theme }) => (
+        <FormContainer
+          formContext={argsFormContext}
+          FormProps={{
+            className: css`
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: ${theme.spacing(2)};
+              padding: ${theme.spacing(2)};
+              background-color: ${theme.palette.primary.light};
+              border-top-left-radius: ${theme.spacing(2.2)};
+              border-top-right-radius: ${theme.spacing(2.2)};
+            `,
+          }}
+        >
+          <SelectElement
+            css={inputStyle}
+            name="funcKey"
+            label="Formula"
+            size="small"
+            required
+            options={functionOptions.map(({ key, label }) => ({
+              id: key,
+              label,
+            }))}
+            sx={{ minWidth: 140 }}
+          />
+          <TextFieldElement
+            css={inputStyle}
+            name="xStart"
+            label="X start"
+            defaultValue="-1"
+            size="small"
+            type="number"
+            required
+          />
+          <TextFieldElement
+            css={inputStyle}
+            name="xEnd"
+            label="X end"
+            defaultValue="1"
+            size="small"
+            type="number"
+            required
+          />
+        </FormContainer>
+      )}
+    </ClassNames>
   );
 };
 
-const FunctionSelector: FC = () => {
-  const dispatch = useAppDispatch();
+const inputStyle = css`
+  &,
+  input {
+    text-align: center;
+  }
 
-  const funcKey = useAppSelector((state) => state.tabulation.funcKey);
-
-  const handleChange = (event: SelectChangeEvent<FunctionKey>): void =>
-    void dispatch(setFunc(event.target.value as FunctionKey));
-
-  return (
-    <FormControl sx={{ minWidth: 130 }} size="small">
-      <InputLabel id="select-formula-label">Formula</InputLabel>
-      <Select
-        labelId="select-formula-label"
-        id="demo-select-small"
-        value={funcKey}
-        label="Formula"
-        onChange={handleChange}
-      >
-        {functionOptions.map((option) => (
-          <MenuItem key={option.key} value={option.key}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-  );
-};
+  .MuiFormHelperText-root {
+    display: none;
+  }
+`;
 
 export default ArgsControls;

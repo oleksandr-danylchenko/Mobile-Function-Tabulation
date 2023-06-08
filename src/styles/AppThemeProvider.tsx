@@ -1,12 +1,14 @@
 import * as React from 'react';
 
-import '@fontsource/poppins';
-
 import {
+  Theme as MuiTheme,
   ThemeProvider,
   createTheme,
   responsiveFontSizes,
 } from '@mui/material/styles';
+import '@emotion/react';
+
+import '@fontsource/poppins';
 
 type Props = {
   children?: React.ReactNode;
@@ -29,6 +31,10 @@ declare module '@mui/material/styles' {
   interface TypeBackground {
     opposite: string;
   }
+}
+
+declare module '@emotion/react' {
+  export interface Theme extends MuiTheme {}
 }
 
 //children with ReactNode type
