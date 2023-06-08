@@ -5,10 +5,11 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { Stack, Avatar, IconButton, Modal, Typography } from '@mui/material';
 import { useToggle } from 'usehooks-ts';
 
+import avatar_compressed from '@/assets/avatar_compressed.jpeg';
+
 const authorData = {
   name: 'Oleksandr Danylchenko',
-  avatarUrl:
-    'https://lh3.googleusercontent.com/drive-viewer/AFGJ81rH26C93XYBszu51N8PVa0DG9BA2JCb15J6f32VdAzS0cNyF84XMBvXrWiNGQZsNMq78wZqGOVaKLNW4UTQLs2OR752=s1600',
+  avatarUrl: avatar_compressed,
 };
 
 const AuthorModal: FC = () => {
@@ -64,20 +65,31 @@ const AuthorModal: FC = () => {
               src={authorData.avatarUrl}
               sx={{ width: 240, height: 240 }}
             />
-            <Typography
-              id="author-modal-title"
-              variant="h3"
-              sx={{ lineHeight: 1.2 }}
-            >
+            <Typography id="author-modal-title" variant="h3">
               {authorData.name}
             </Typography>
-            <Typography
-              id="author-modal-description"
-              variant="h5"
-              sx={{ lineHeight: 1.7 }}
-            >
-              Full-Stack JS/TS Developer <br /> <i>React + Node.js = ❤️</i>
-            </Typography>
+            <Stack gap={1}>
+              <Typography id="author-modal-description" variant="h4">
+                Full-Stack <br />
+                Web Developer
+              </Typography>
+              <Typography
+                id="author-modal-description"
+                variant="h5"
+                sx={{ textTransform: 'it' }}
+              >
+                <i>
+                  React + Node.js = ❤️
+                  <Typography
+                    id="author-modal-description"
+                    variant="h6"
+                    fontSize={11}
+                  >
+                    A bit of Ruby and Python too ✨
+                  </Typography>
+                </i>
+              </Typography>
+            </Stack>
           </Stack>
         </Stack>
       </Modal>
