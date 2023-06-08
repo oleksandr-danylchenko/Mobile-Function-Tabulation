@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { PaletteMode } from '@mui/material';
+import '@fontsource/poppins';
+
 import {
   ThemeProvider,
   createTheme,
@@ -46,7 +47,7 @@ export const AppThemeProvider: React.FC<Props> = ({ children }) => {
         },
       },
       typography: {
-        fontFamily: 'Lato, sans-serif',
+        fontFamily: 'Poppins, Lato, sans-serif',
       },
       components: {
         MuiLink: {

@@ -34,7 +34,7 @@ const AuthorModal: FC = () => {
         aria-labelledby="author-modal-title"
         aria-describedby="author-modal-description"
       >
-        <Stack alignItems="center" justifyContent="center" height="100%">
+        <Stack alignItems="center" justifyContent="center" height="100%" p={2}>
           <Stack
             alignItems="center"
             justifyContent="center"
@@ -44,7 +44,7 @@ const AuthorModal: FC = () => {
               position: 'relative',
               backgroundColor: 'primary.light',
               borderRadius: 10,
-              lineHeight: 1.6,
+              textAlign: 'center',
             }}
           >
             <IconButton
@@ -67,14 +67,14 @@ const AuthorModal: FC = () => {
             <Typography
               id="author-modal-title"
               variant="h3"
-              sx={{ lineHeight: 'inherit' }}
+              sx={{ lineHeight: 1.2 }}
             >
               {authorData.name}
             </Typography>
             <Typography
               id="author-modal-description"
               variant="h5"
-              sx={{ lineHeight: 'inherit' }}
+              sx={{ lineHeight: 1.7 }}
             >
               Full-Stack JS/TS Developer <br /> <i>React + Node.js = ❤️</i>
             </Typography>
