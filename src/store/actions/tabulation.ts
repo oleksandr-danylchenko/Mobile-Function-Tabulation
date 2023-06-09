@@ -4,15 +4,11 @@ import {
   TabulationControls,
   TabulationResults,
 } from '@/store/slices/tabulationSlice';
-import { evaluateFunctionResults } from '@/utils/calculate';
+import { evaluationWorkerInstance } from '@/sw/evaluationWorker/instance';
 
 export const reevaluateFunc = createAsyncThunk<
   TabulationResults,
   TabulationControls
->('tabulation/reevaluateFunc', async (controls) => {
-  return new Promise((res) => {
-    setTimeout(() => {
-      res(evaluateFunctionResults(controls));
-    });
-  });
-});
+>('tabulation/reevaluateFunc', async (controls) =>
+  evaluationWorkerInstance.evaluateFunctionResultsSW(controls),
+);
