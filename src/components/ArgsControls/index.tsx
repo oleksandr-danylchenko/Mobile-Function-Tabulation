@@ -11,27 +11,21 @@ import { Stack } from '@mui/material';
 
 import { functionOptions } from '@/fixtures/functions';
 import {
-  selectArgsControls,
   setTabulationArgs,
-  TabulationState,
+  TabulationControls,
 } from '@/store/slices/tabulationSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
-export type ArgsControlsForm = Pick<
-  TabulationState,
-  'xStart' | 'xEnd' | 'funcKey' | 'step'
->;
-
 const ArgsControls: FC = () => {
   const dispatch = useAppDispatch();
-  const argsControls = useAppSelector(selectArgsControls);
+  const controls = useAppSelector((state) => state.tabulation.controls);
 
-  const argsFormContext = useForm<ArgsControlsForm>({
-    defaultValues: argsControls,
+  const argsFormContext = useForm<TabulationControls>({
+    defaultValues: controls,
     mode: 'onBlur',
   });
   const { handleSubmit } = argsFormContext;
-  const handleFormBlur = (data: ArgsControlsForm): void => {
+  const handleFormBlur = (data: TabulationControls): void => {
     dispatch(setTabulationArgs(data));
   };
 

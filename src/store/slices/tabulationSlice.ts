@@ -1,6 +1,5 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { ArgsControlsForm } from '@/components/ArgsControls';
 import {
   FunctionKey,
   FunctionOption,
@@ -8,25 +7,31 @@ import {
 } from '@/fixtures/functions';
 import type { RootState } from '@/store/store';
 
-export interface TabulationState {
+export interface TabulationControls {
   funcKey: FunctionKey;
   xStart: number;
   xEnd: number;
   step: number;
 }
 
+export interface TabulationState {
+  controls: TabulationControls;
+}
+
 const initialState: TabulationState = {
-  funcKey: FunctionKey.X_SQUARED,
-  xStart: -1,
-  xEnd: 1,
-  step: 0.1,
+  controls: {
+    funcKey: FunctionKey.X_SQUARED,
+    xStart: -1,
+    xEnd: 1,
+    step: 0.1,
+  },
 };
 
 const tabulationSlice = createSlice({
   name: 'tabulation',
   initialState,
   reducers: {
-    setTabulationArgs: (state, action: PayloadAction<ArgsControlsForm>) =>
+    setTabulationArgs: (state, action: PayloadAction<TabulationControls>) =>
       Object.assign(state, action.payload),
   },
 });
@@ -36,14 +41,4 @@ export const tabulationReducer = tabulationSlice.reducer;
 export const { setTabulationArgs } = tabulationSlice.actions;
 
 export const selectFunctionOption = (state: RootState): FunctionOption =>
-  functionsOptions[state.tabulation.funcKey]!;
-
-export const selectArgsControls = createSelector(
-  (state: RootState) => state.tabulation,
-  (tabulation) => ({
-    funcKey: tabulation.funcKey,
-    xStart: tabulation.xStart,
-    xEnd: tabulation.xEnd,
-    step: tabulation.step,
-  }),
-);
+  functionsOptions[state.tabulation.controls.funcKey]!;
