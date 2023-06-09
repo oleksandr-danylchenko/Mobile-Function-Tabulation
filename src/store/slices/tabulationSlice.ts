@@ -6,6 +6,7 @@ import {
   functionsOptions,
 } from '@/fixtures/functions';
 import type { RootState } from '@/store/store';
+import { evaluateFunctionResults } from '@/utils/calculate';
 
 export interface TabulationControls {
   funcKey: FunctionKey;
@@ -14,17 +15,26 @@ export interface TabulationControls {
   step: number;
 }
 
-export interface TabulationState {
-  controls: TabulationControls;
+export interface TabulationResult {
+  x: number;
+  y: number;
 }
 
+export interface TabulationState {
+  controls: TabulationControls;
+  results: Array<TabulationResult>;
+}
+
+const initialControls = {
+  funcKey: FunctionKey.X_SQUARED,
+  xStart: -1,
+  xEnd: 1,
+  step: 0.1,
+};
+
 const initialState: TabulationState = {
-  controls: {
-    funcKey: FunctionKey.X_SQUARED,
-    xStart: -1,
-    xEnd: 1,
-    step: 0.1,
-  },
+  controls: initialControls,
+  results: evaluateFunctionResults(initialControls),
 };
 
 const tabulationSlice = createSlice({
