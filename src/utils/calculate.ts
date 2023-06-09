@@ -1,16 +1,16 @@
 import { functionsOptions } from '@/fixtures/functions';
 import {
   TabulationControls,
-  TabulationResult,
+  TabulationResults,
 } from '@/store/slices/tabulationSlice';
 
 export const evaluateFunctionResults = (
   controls: TabulationControls,
-): Array<TabulationResult> => {
+): TabulationResults => {
   const { funcKey, xStart, xEnd, step } = controls;
   const funcExecute = functionsOptions[funcKey]!.execute;
 
-  const results: Array<TabulationResult> = [];
+  const results: TabulationResults = [];
   for (let x = xStart; x <= xEnd; x += step) {
     results.push({ x, y: funcExecute(x) });
   }

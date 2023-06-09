@@ -1,12 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import {
-  FunctionKey,
-  FunctionOption,
-  functionsOptions,
-} from '@/fixtures/functions';
-import type { RootState } from '@/store/store';
-import { evaluateFunctionResults } from '@/utils/calculate';
+import { FunctionKey } from '@/fixtures/functions';
+import { reevaluateFunc } from '@/store/actions/tabulation';
 
 export interface TabulationControls {
   funcKey: FunctionKey;
@@ -15,14 +10,15 @@ export interface TabulationControls {
   step: number;
 }
 
-export interface TabulationResult {
+export type TabulationResults = Array<{
   x: number;
   y: number;
-}
+}>;
 
 export interface TabulationState {
+  isEvaluating: boolean;
   controls: TabulationControls;
-  results: Array<TabulationResult>;
+  results: TabulationResults;
 }
 
 const initialControls = {
@@ -33,22 +29,27 @@ const initialControls = {
 };
 
 const initialState: TabulationState = {
+  isEvaluating: true,
   controls: initialControls,
-  results: evaluateFunctionResults(initialControls),
+  results: [],
 };
 
 const tabulationSlice = createSlice({
   name: 'tabulation',
   initialState,
-  reducers: {
-    setTabulationArgs: (state, action: PayloadAction<TabulationControls>) =>
-      Object.assign(state, action.payload),
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(reevaluateFunc.pending, (state, action) => {
+      state.isEvaluating = true;
+      Object.assign(state, action.meta.arg);
+    });
+    builder.addCase(reevaluateFunc.fulfilled, (state, action) => {
+      state.isEvaluating = false;
+      state.results = action.payload;
+    });
   },
 });
 
 export const tabulationReducer = tabulationSlice.reducer;
 
-export const { setTabulationArgs } = tabulationSlice.actions;
-
-export const selectFunctionOption = (state: RootState): FunctionOption =>
-  functionsOptions[state.tabulation.controls.funcKey]!;
+// export const { reevaluateFunc } = tabulationSlice.actions;

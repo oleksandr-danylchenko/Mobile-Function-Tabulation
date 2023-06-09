@@ -10,10 +10,8 @@ import { ClassNames, css } from '@emotion/react';
 import { Stack } from '@mui/material';
 
 import { functionOptions } from '@/fixtures/functions';
-import {
-  setTabulationArgs,
-  TabulationControls,
-} from '@/store/slices/tabulationSlice';
+import { reevaluateFunc } from '@/store/actions/tabulation';
+import { TabulationControls } from '@/store/slices/tabulationSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const ArgsControls: FC = () => {
@@ -26,7 +24,7 @@ const ArgsControls: FC = () => {
   });
   const { handleSubmit } = argsFormContext;
   const handleFormBlur = (data: TabulationControls): void => {
-    dispatch(setTabulationArgs(data));
+    dispatch(reevaluateFunc(data));
   };
 
   return (
