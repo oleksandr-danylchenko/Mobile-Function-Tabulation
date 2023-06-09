@@ -12,12 +12,14 @@ export interface TabulationState {
   funcKey: FunctionKey;
   xStart: number;
   xEnd: number;
+  step: number;
 }
 
 const initialState: TabulationState = {
   funcKey: FunctionKey.X_SQUARED,
   xStart: -1,
   xEnd: 1,
+  step: 0.1,
 };
 
 const tabulationSlice = createSlice({
@@ -42,5 +44,6 @@ export const selectArgsControls = createSelector(
     funcKey: tabulation.funcKey,
     xStart: tabulation.xStart,
     xEnd: tabulation.xEnd,
+    step: tabulation.step,
   }),
 );

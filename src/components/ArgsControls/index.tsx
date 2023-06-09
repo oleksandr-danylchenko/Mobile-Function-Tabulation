@@ -7,6 +7,7 @@ import {
 } from 'react-hook-form-mui';
 
 import { ClassNames, css } from '@emotion/react';
+import { Stack } from '@mui/material';
 
 import { functionOptions } from '@/fixtures/functions';
 import {
@@ -18,7 +19,7 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 
 export type ArgsControlsForm = Pick<
   TabulationState,
-  'xStart' | 'xEnd' | 'funcKey'
+  'xStart' | 'xEnd' | 'funcKey' | 'step'
 >;
 
 const ArgsControls: FC = () => {
@@ -53,34 +54,46 @@ const ArgsControls: FC = () => {
             `,
           }}
         >
-          <SelectElement
-            css={inputStyle}
-            name="funcKey"
-            label="Formula"
-            size="small"
-            required
-            options={functionOptions.map(({ key, label }) => ({
-              id: key,
-              label,
-            }))}
-            sx={{ minWidth: 140 }}
-          />
-          <TextFieldElement
-            css={inputStyle}
-            name="xStart"
-            label="X start"
-            size="small"
-            type="number"
-            required
-          />
-          <TextFieldElement
-            css={inputStyle}
-            name="xEnd"
-            label="X end"
-            size="small"
-            type="number"
-            required
-          />
+          <Stack gap={2}>
+            <SelectElement
+              css={inputStyle}
+              name="funcKey"
+              label="Formula"
+              size="small"
+              required
+              options={functionOptions.map(({ key, label }) => ({
+                id: key,
+                label,
+              }))}
+              sx={{ minWidth: 140 }}
+            />
+            <Stack direction="row" gap={2}>
+              <TextFieldElement
+                css={inputStyle}
+                name="xStart"
+                label="X start"
+                size="small"
+                type="number"
+                required
+              />
+              <TextFieldElement
+                css={inputStyle}
+                name="xEnd"
+                label="X end"
+                size="small"
+                type="number"
+                required
+              />
+              <TextFieldElement
+                css={inputStyle}
+                name="step"
+                label="Step"
+                size="small"
+                type="number"
+                required
+              />
+            </Stack>
+          </Stack>
         </FormContainer>
       )}
     </ClassNames>
