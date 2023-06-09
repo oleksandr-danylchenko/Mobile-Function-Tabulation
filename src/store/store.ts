@@ -6,6 +6,15 @@ import { tabulationReducer } from '@/store/slices/tabulationSlice';
 
 const store = configureStore({
   reducer: { tabulation: tabulationReducer },
+  devTools: {
+    stateSanitizer: (state: any) => ({
+      ...state,
+      tabulation: {
+        ...state.tabulation,
+        results: '<omitted from Redux DevTools>',
+      },
+    }),
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
