@@ -11,9 +11,12 @@ export default defineConfig({
       jsxImportSource: '@emotion/react',
       plugins: [['@swc/plugin-emotion', { sourceMap: true }]],
     }),
-    ValidateEnv({}),
     comlink(),
+    ValidateEnv({}),
   ],
+  worker: {
+    plugins: [comlink()],
+  },
   build: {},
   resolve: {
     alias: {
