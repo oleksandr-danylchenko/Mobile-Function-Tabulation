@@ -17,3 +17,11 @@ export const fullParent = css`
   ${fullWidth};
   ${fullHeight};
 `;
+
+// Mixin for absolute positioning centering
+export const absoluteCenter = css`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
