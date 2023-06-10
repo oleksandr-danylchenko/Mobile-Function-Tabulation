@@ -5,6 +5,7 @@ import { Box, css, Theme } from '@mui/material';
 
 // import Desmos from 'desmos';
 import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
+import { usePreviousRender } from '@/hooks';
 import { useAppSelector } from '@/store/store';
 import { desmosButton } from '@/styles/mixins';
 
@@ -12,10 +13,9 @@ const Plot: FC = () => {
   const isEvaluating = useAppSelector((state) => state.tabulation.isEvaluating);
   const results = useAppSelector((state) => state.tabulation.results);
 
+  const prevEvaluatedAt = usePreviousRender(results?.evaluatedAt);
+
   const [calculator, setCalculator] = useState<Desmos.Calculator | null>(null);
-
-  const [rendered, setRendered] = useState(false);
-
   const renderDesmos = useCallback(
     (el: HTMLDivElement) => {
       if (el && !calculator) {
@@ -35,29 +35,26 @@ const Plot: FC = () => {
   );
 
   useEffect(() => {
-    // if (!calculator || isEvaluating || !results) return;
-
     if (!calculator) return;
+    if (!results || results?.evaluatedAt === prevEvaluatedAt) return;
 
-    // calculator.setBlank();
-    //
-    // // setRendered(true);
-    // calculator.setExpression({
-    //   type: 'table',
-    //   columns: [
-    //     {
-    //       latex: 'x',
-    //       values: ['1', '2', '3', '4', '5'],
-    //       dragMode: Desmos.DragModes.NONE,
-    //     },
-    //     {
-    //       latex: 'y',
-    //       values: ['1', '4', '9', '16', '25'],
-    //       dragMode: Desmos.DragModes.NONE,
-    //     },
-    //   ],
-    // });
-  }, [calculator, rendered, isEvaluating, results]);
+    calculator.setBlank();
+    calculator.setExpression({
+      type: 'table',
+      columns: [
+        {
+          latex: 'x',
+          values: results.x as any, // JS will auto convert to string
+          dragMode: Desmos.DragModes.NONE,
+        },
+        {
+          latex: 'y',
+          values: results.y as any, // JS will auto convert to string
+          dragMode: Desmos.DragModes.NONE,
+        },
+      ],
+    });
+  }, [calculator, prevEvaluatedAt, results]);
 
   return <Box ref={renderDesmos} css={desmosStyle} flex={1} />;
 };
