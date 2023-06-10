@@ -11,6 +11,7 @@ export const evaluateFunctionResults = (
   const funcExecute = functionsOptions[funcKey]!.execute;
 
   const results: TabulationResults = {
+    evaluatedAt: Date.now(),
     x: [],
     y: [],
   };
