@@ -4,7 +4,7 @@ import {
   TabulationControls,
   TabulationResults,
 } from '@/store/slices/tabulationSlice';
-import { evaluationWorkerInstance } from '@/sw/evaluationWorker/instance';
+import { evaluationWorkerInstance } from '@/webWorkers/evaluation/instance';
 
 export const reevaluateFunc = createAsyncThunk<
   TabulationResults,
