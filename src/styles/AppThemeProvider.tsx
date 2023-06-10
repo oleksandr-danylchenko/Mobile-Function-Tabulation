@@ -15,21 +15,12 @@ type Props = {
 };
 
 declare module '@mui/material/styles' {
-  // index signature typegradients
-
-  interface TypeGradient {
-    [key: string]: string;
+  interface PaletteColor {
+    lighter?: string;
   }
 
-  interface Palette {
-    gradient: TypeGradient;
-  }
-  interface PaletteOptions {
-    gradient: TypeGradient;
-  }
-
-  interface TypeBackground {
-    opposite: string;
+  interface SimplePaletteColorOptions {
+    lighter?: string;
   }
 }
 
@@ -44,12 +35,8 @@ export const AppThemeProvider: React.FC<Props> = ({ children }) => {
       palette: {
         primary: {
           main: '#90caf9',
-          light: '#e3f2fd',
-        },
-        gradient: {
-          bronze: 'linear-gradient(180deg, #9C6D3E 0%, #E8C8A9 100%)',
-          silver: 'linear-gradient(180deg, #808080 0%, #DFDFDF 100%)',
-          gold: 'linear-gradient(180deg, #A3873C 0%, #E3D294 100%)',
+          light: '#c7e4ff',
+          lighter: '#e5f3ff',
         },
       },
       typography: {

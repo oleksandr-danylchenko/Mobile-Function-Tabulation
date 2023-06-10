@@ -1,15 +1,16 @@
 import { FC } from 'react';
 
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import ArgsControls from '@/components/ArgsControls';
 import AuthorModal from '@/components/AuthorModal';
+import Plot from '@/components/Plot';
 
 const Home: FC = () => {
   return (
-    <Stack height="100vh" gap={2}>
+    <Stack height="100vh">
       <AuthorModal />
-      <Box flex={1} sx={{ backgroundColor: 'white' }} />
+      <Plot />
       <ArgsControls />
     </Stack>
   );
