@@ -1,1 +1,1 @@
-export const MAX_DIMENSIONS_BOUNDS = 10000;
+export const MAX_DIMENSIONS_BOUNDS = 3000;
