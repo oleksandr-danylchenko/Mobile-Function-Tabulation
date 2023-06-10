@@ -13,10 +13,12 @@ import { functionOptions } from '@/fixtures/functions';
 import { reevaluateFunc } from '@/store/actions/tabulation';
 import { TabulationControls } from '@/store/slices/tabulationSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
+import { fullWidth } from '@/styles/mixins';
 
 const ArgsControls: FC = () => {
   const dispatch = useAppDispatch();
   const controls = useAppSelector((state) => state.tabulation.controls);
+  const { xStart, xEnd } = controls;
 
   const argsFormContext = useForm<TabulationControls>({
     defaultValues: controls,
@@ -26,6 +28,10 @@ const ArgsControls: FC = () => {
   const handleFormBlur = (data: TabulationControls): void => {
     dispatch(reevaluateFunc(data));
   };
+
+  const xStartInputProps = { min: -10000, max: xEnd, step: 0.1 };
+  const xEndInputProps = { min: xStart, max: 10000, step: 0.1 };
+  const stepInputProps = { min: 0.0001, max: xEnd - xStart, step: 0.01 };
 
   return (
     <ClassNames>
@@ -46,7 +52,7 @@ const ArgsControls: FC = () => {
             `,
           }}
         >
-          <Stack gap={2}>
+          <Stack css={fullWidth} gap={2}>
             <SelectElement
               css={inputStyle}
               name="funcKey"
@@ -66,7 +72,10 @@ const ArgsControls: FC = () => {
                 label="X start"
                 size="small"
                 type="number"
+                fullWidth
                 required
+                inputProps={xStartInputProps}
+                validation={xStartInputProps}
               />
               <TextFieldElement
                 css={inputStyle}
@@ -74,7 +83,10 @@ const ArgsControls: FC = () => {
                 label="X end"
                 size="small"
                 type="number"
+                fullWidth
                 required
+                inputProps={xEndInputProps}
+                validation={xEndInputProps}
               />
               <TextFieldElement
                 css={inputStyle}
@@ -82,7 +94,10 @@ const ArgsControls: FC = () => {
                 label="Step"
                 size="small"
                 type="number"
+                fullWidth
                 required
+                inputProps={stepInputProps}
+                validation={stepInputProps}
               />
             </Stack>
           </Stack>
