@@ -9,6 +9,7 @@ import {
 import { ClassNames, css } from '@emotion/react';
 import { Stack } from '@mui/material';
 
+import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
 import { functionOptions } from '@/fixtures/functions';
 import { reevaluateFunc } from '@/store/actions/tabulation';
 import { TabulationControls } from '@/store/slices/tabulationSlice';
@@ -29,8 +30,12 @@ const ArgsControls: FC = () => {
     dispatch(reevaluateFunc(data));
   };
 
-  const xStartInputProps = { min: -10000, max: xEnd, step: 0.1 };
-  const xEndInputProps = { min: xStart, max: 10000, step: 0.1 };
+  const xStartInputProps = {
+    min: MAX_DIMENSIONS_BOUNDS * -1,
+    max: xEnd,
+    step: 0.1,
+  };
+  const xEndInputProps = { min: xStart, max: MAX_DIMENSIONS_BOUNDS, step: 0.1 };
   const stepInputProps = { min: 0.0001, max: xEnd - xStart, step: 0.01 };
 
   return (

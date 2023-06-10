@@ -1,0 +1,1 @@
+export const MAX_DIMENSIONS_BOUNDS = 10000;

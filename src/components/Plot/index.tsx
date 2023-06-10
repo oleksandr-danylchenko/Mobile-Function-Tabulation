@@ -3,6 +3,7 @@ import { FC, useRef, useCallback, useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 // import Desmos from 'desmos';
 
+import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
 import { useAppSelector } from '@/store/store';
 
 const Plot: FC = () => {
@@ -16,13 +17,16 @@ const Plot: FC = () => {
   const renderDesmos = useCallback(
     (el: HTMLDivElement) => {
       if (el && !calculator) {
-        setCalculator(
-          window.Desmos.GraphingCalculator(el, {
-            expressions: false,
-            keypad: false,
-            settingsMenu: false,
-          }),
-        );
+        const renderedCalculator = window.Desmos.GraphingCalculator(el, {
+          expressions: false,
+          keypad: false,
+          settingsMenu: false,
+        });
+        renderedCalculator.setMathBounds({
+          left: MAX_DIMENSIONS_BOUNDS,
+          right: MAX_DIMENSIONS_BOUNDS,
+        });
+        setCalculator(renderedCalculator);
       }
     },
     [calculator],
