@@ -40,6 +40,7 @@ export const AppThemeProvider: React.FC<Props> = ({ children }) => {
         },
         grey: {
           100: '#ededed',
+          200: '#5a5e63',
         },
       },
       typography: {

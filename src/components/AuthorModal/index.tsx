@@ -37,12 +37,7 @@ const AuthorModal: FC = () => {
         color="inherit"
         onClick={toggleOpen}
       >
-        <AccountCircleIcon
-          fontSize="small"
-          width={16}
-          height={16}
-          sx={{ opacity: 0.6 }}
-        />
+        <AccountCircleIcon fontSize="small" width={16} height={16} />
       </Button>
       <Modal
         open={open}

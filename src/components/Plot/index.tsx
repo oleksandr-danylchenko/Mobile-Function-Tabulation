@@ -1,10 +1,12 @@
-import { FC, useRef, useCallback, useState, useEffect } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
-import { Box } from '@mui/material';
+import { SerializedStyles } from '@emotion/react';
+import { Box, css, Theme } from '@mui/material';
+
 // import Desmos from 'desmos';
-
 import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
 import { useAppSelector } from '@/store/store';
+import { desmosButton } from '@/styles/mixins';
 
 const Plot: FC = () => {
   const isEvaluating = useAppSelector((state) => state.tabulation.isEvaluating);
@@ -35,37 +37,40 @@ const Plot: FC = () => {
   useEffect(() => {
     // if (!calculator || isEvaluating || !results) return;
 
-    if (!calculator || rendered) return;
+    if (!calculator) return;
 
-    setRendered(true);
-    calculator.setExpression({
-      type: 'table',
-      columns: [
-        {
-          latex: 'x',
-          values: ['1', '2', '3', '4', '5'],
-          dragMode: Desmos.DragModes.NONE,
-        },
-        {
-          latex: 'y',
-          values: ['1', '4', '9', '16', '25'],
-          dragMode: Desmos.DragModes.NONE,
-        },
-      ],
-    });
+    // calculator.setBlank();
+    //
+    // // setRendered(true);
+    // calculator.setExpression({
+    //   type: 'table',
+    //   columns: [
+    //     {
+    //       latex: 'x',
+    //       values: ['1', '2', '3', '4', '5'],
+    //       dragMode: Desmos.DragModes.NONE,
+    //     },
+    //     {
+    //       latex: 'y',
+    //       values: ['1', '4', '9', '16', '25'],
+    //       dragMode: Desmos.DragModes.NONE,
+    //     },
+    //   ],
+    // });
   }, [calculator, rendered, isEvaluating, results]);
 
-  return (
-    <Box
-      ref={renderDesmos}
-      flex={1}
-      sx={{
-        backgroundColor: 'primary.lighter',
-        borderBottomLeftRadius: (theme) => theme.spacing(2.2),
-        borderBottomRightRadius: (theme) => theme.spacing(2.2),
-      }}
-    />
-  );
+  return <Box ref={renderDesmos} css={desmosStyle} flex={1} />;
 };
+
+const desmosStyle = (theme: Theme): SerializedStyles => css`
+  .dcg-btn-flat-gray {
+    ${desmosButton(theme)};
+
+    .dcg-icon {
+      opacity: 1;
+      color: ${theme.palette.grey[200]};
+    }
+  }
+`;
 
 export default Plot;

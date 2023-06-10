@@ -28,7 +28,8 @@ export const absoluteCenter = css`
 `;
 
 export const desmosButton = (theme: Theme): SerializedStyles => css`
-  background-color: ${theme.palette.grey[100]};
+  background-color: ${theme.palette.primary
+    .lighter} !important; // Overrides Desmos inline style
   box-shadow: 0 0 5px #00000026;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -38,4 +39,8 @@ export const desmosButton = (theme: Theme): SerializedStyles => css`
   height: 36px;
   min-width: unset;
   line-height: 37px;
+
+  svg {
+    fill: ${theme.palette.grey[200]};
+  }
 `;
