@@ -46,9 +46,7 @@ const ArgsControls: FC = () => {
               justify-content: center;
               gap: ${theme.spacing(2)};
               padding: ${theme.spacing(2)};
-              background-color: ${theme.palette.primary.light};
-              border-top-left-radius: ${theme.spacing(2.2)};
-              border-top-right-radius: ${theme.spacing(2.2)};
+              background-color: ${theme.palette.primary.lighter};
             `,
           }}
         >

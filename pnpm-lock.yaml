@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@capacitor/android':
@@ -31,6 +35,9 @@ dependencies:
   '@reduxjs/toolkit':
     specifier: ^1.9.5
     version: 1.9.5(react-redux@8.0.5)(react@18.2.0)
+  '@types/desmos':
+    specifier: ^1.6.0
+    version: 1.6.0
   comlink:
     specifier: ^4.4.1
     version: 4.4.1
@@ -1306,6 +1313,10 @@ packages:
   /@types/chai@4.3.5:
     resolution: {integrity: sha512-mEo1sAde+UCE6b2hxn332f1g1E8WfYRu6p5SvTKr2ZKC1f7gFJXk4h5PyGP9Dt6gCaG8y8XhwnXWC6Iy2cmBng==}
     dev: true
+
+  /@types/desmos@1.6.0:
+    resolution: {integrity: sha512-g+U7FVw3/iu88uzaJ/RT+coKxKiCxOWx6ue1hQTLsTPN7jidJw2RMbB+UviSImAUm0TkdkRV0nE9hLSvNX45zQ==}
+    dev: false
 
   /@types/fs-extra@8.1.2:
     resolution: {integrity: sha512-SvSrYXfWSc7R4eqnOzbQF4TZmfpNSM9FrSWLU3EUnWBuyZqNBOrv1B1JA3byUDPUl9z4Ab3jeZG2eDdySlgNMg==}
