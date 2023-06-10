@@ -2,11 +2,18 @@ import { FC } from 'react';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Stack, Avatar, IconButton, Modal, Typography } from '@mui/material';
+import {
+  Stack,
+  Button,
+  Avatar,
+  IconButton,
+  Modal,
+  Typography,
+} from '@mui/material';
 import { useToggle } from 'usehooks-ts';
 
 import avatar_compressed from '@/assets/avatar_compressed.jpeg';
-import { absoluteCenter } from '@/styles/mixins';
+import { absoluteCenter, desmosButton } from '@/styles/mixins';
 
 const authorData = {
   name: 'Oleksandr Danylchenko',
@@ -18,7 +25,8 @@ const AuthorModal: FC = () => {
 
   return (
     <>
-      <IconButton
+      <Button
+        css={desmosButton}
         aria-label="Show author info"
         sx={{
           position: 'absolute',
@@ -29,8 +37,13 @@ const AuthorModal: FC = () => {
         color="inherit"
         onClick={toggleOpen}
       >
-        <AccountCircleIcon />
-      </IconButton>
+        <AccountCircleIcon
+          fontSize="small"
+          width={16}
+          height={16}
+          sx={{ opacity: 0.6 }}
+        />
+      </Button>
       <Modal
         open={open}
         onClose={toggleOpen}

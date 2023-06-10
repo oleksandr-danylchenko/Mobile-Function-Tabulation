@@ -38,6 +38,9 @@ export const AppThemeProvider: React.FC<Props> = ({ children }) => {
           light: '#c7e4ff',
           lighter: '#e5f3ff',
         },
+        grey: {
+          100: '#ededed',
+        },
       },
       typography: {
         fontFamily: 'Poppins, Lato, sans-serif',
