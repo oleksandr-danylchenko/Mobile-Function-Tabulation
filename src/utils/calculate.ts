@@ -10,9 +10,13 @@ export const evaluateFunctionResults = (
   const { funcKey, xStart, xEnd, step } = controls;
   const funcExecute = functionsOptions[funcKey]!.execute;
 
-  const results: TabulationResults = [];
+  const results: TabulationResults = {
+    x: [],
+    y: [],
+  };
   for (let x = xStart; x <= xEnd; x += step) {
-    results.push({ x, y: funcExecute(x) });
+    results.x.push(x);
+    results.y.push(funcExecute(x));
   }
   return results;
 };

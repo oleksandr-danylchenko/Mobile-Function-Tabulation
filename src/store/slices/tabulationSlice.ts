@@ -10,15 +10,15 @@ export interface TabulationControls {
   step: number;
 }
 
-export type TabulationResults = Array<{
-  x: number;
-  y: number;
-}>;
+export type TabulationResults = {
+  x: number[];
+  y: number[];
+};
 
 export interface TabulationState {
   isEvaluating: boolean;
   controls: TabulationControls;
-  results: TabulationResults;
+  results?: TabulationResults;
 }
 
 const initialControls = {
@@ -31,7 +31,6 @@ const initialControls = {
 const initialState: TabulationState = {
   isEvaluating: true,
   controls: initialControls,
-  results: [],
 };
 
 const tabulationSlice = createSlice({
