@@ -11,17 +11,29 @@ const Plot: FC = () => {
 
   const [calculator, setCalculator] = useState<Desmos.Calculator | null>(null);
 
+  const [rendered, setRendered] = useState(false);
+
   const renderDesmos = useCallback(
     (el: HTMLDivElement) => {
-      if (!el || calculator) return;
-      setCalculator(window.Desmos.GraphingCalculator(el, {}));
+      if (el && !calculator) {
+        setCalculator(
+          window.Desmos.GraphingCalculator(el, {
+            expressions: false,
+            keypad: false,
+            settingsMenu: false,
+          }),
+        );
+      }
     },
     [calculator],
   );
 
   useEffect(() => {
-    if (!calculator || isEvaluating || !results) return;
+    // if (!calculator || isEvaluating || !results) return;
 
+    if (!calculator || rendered) return;
+
+    setRendered(true);
     calculator.setExpression({
       type: 'table',
       columns: [
@@ -37,7 +49,7 @@ const Plot: FC = () => {
         },
       ],
     });
-  }, [calculator, isEvaluating, results]);
+  }, [calculator, rendered, isEvaluating, results]);
 
   return (
     <Box
