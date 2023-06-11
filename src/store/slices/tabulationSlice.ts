@@ -46,7 +46,7 @@ const tabulationSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(reevaluateFunc.pending, (state, action) => {
-        Object.assign(state, action.meta.arg);
+        Object.assign(state.controls, action.meta.arg);
       })
       .addMatcher(isPending(evaluateFunc, reevaluateFunc), (state) => {
         state.isEvaluating = true;
