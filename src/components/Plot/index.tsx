@@ -68,6 +68,15 @@ const Plot: FC = () => {
 };
 
 const desmosStyle = (theme: Theme): SerializedStyles => css`
+  .dcg-calculator-api-container .dcg-label {
+    padding: ${theme.spacing(0.5)} ${theme.spacing(0.3)} !important;
+
+    span {
+      font-family: ${theme.typography.fontFamily} !important;
+      font-size: 1rem;
+    }
+  }
+
   .dcg-btn-flat-gray {
     ${desmosButton(theme)};
 
