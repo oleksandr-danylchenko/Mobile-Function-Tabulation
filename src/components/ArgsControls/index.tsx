@@ -40,7 +40,7 @@ const ArgsControls: FC<Props> = (props) => {
     step: 0.1,
   };
   const stepInputProps = {
-    min: 0.0001,
+    min: 0.001,
     max: watch('xEnd') - watch('xStart'),
     step: 0.01,
   };
