@@ -3,12 +3,15 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import { Box, css, Theme, useTheme } from '@mui/material';
 
-import { MAX_X_BOUNDS, MAX_Y_BOUNDS } from '@/constants';
+import { MAX_X_BOUNDS, MAX_Y_BOUNDS, RENDER_POINTS_CAP } from '@/constants';
+import { selectFunctionOption } from '@/store/slices/tabulationSlice';
 import { useAppSelector } from '@/store/store';
 import { desmosButton, fullParent } from '@/styles/mixins';
 
 const Plot: FC = () => {
   const theme = useTheme();
+
+  const functionOption = useAppSelector(selectFunctionOption);
 
   const results = useAppSelector((state) => state.tabulation.results);
   const [renderedEvaluatedAt, setRenderedEvaluatedAt] = useState<number>();
@@ -45,24 +48,33 @@ const Plot: FC = () => {
     setRenderedEvaluatedAt(results.evaluatedAt);
 
     const expressionId = `tabulation-expression-${results?.evaluatedAt}`;
-    calculator.setExpression({
-      id: expressionId,
-      type: 'table',
-      columns: [
-        {
-          latex: 'x',
-          values: results.x,
-          dragMode: Desmos.DragModes.NONE,
-          color: theme.palette.primary.main,
-        },
-        {
-          latex: 'y',
-          values: results.y,
-          dragMode: Desmos.DragModes.NONE,
-          color: theme.palette.primary.main,
-        },
-      ],
-    });
+    const pointsNum = results.x.length;
+    calculator.setExpression(
+      pointsNum > RENDER_POINTS_CAP // render approximation
+        ? {
+            id: expressionId,
+            latex: functionOption.latex,
+            color: theme.palette.primary.main,
+          }
+        : {
+            id: expressionId,
+            type: 'table',
+            columns: [
+              {
+                latex: 'x',
+                values: results.x,
+                dragMode: Desmos.DragModes.NONE,
+                color: theme.palette.primary.main,
+              },
+              {
+                latex: 'y',
+                values: results.y,
+                dragMode: Desmos.DragModes.NONE,
+                color: theme.palette.primary.main,
+              },
+            ],
+          },
+    );
 
     const prevExpressionId = `tabulation-expression-${prevEvaluatedAt}`;
     calculator.removeExpression({ id: prevExpressionId });

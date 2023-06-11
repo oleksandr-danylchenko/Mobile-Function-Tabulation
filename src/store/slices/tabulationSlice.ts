@@ -5,8 +5,13 @@ import {
   isRejected,
 } from '@reduxjs/toolkit';
 
-import { FunctionKey } from '@/fixtures/functions';
+import {
+  FunctionKey,
+  FunctionOption,
+  functionsOptions,
+} from '@/fixtures/functions';
 import { evaluateFunc, reevaluateFunc } from '@/store/actions/tabulation';
+import { RootState } from '@/store/store';
 
 export interface TabulationControls {
   funcKey: FunctionKey;
@@ -65,5 +70,8 @@ const tabulationSlice = createSlice({
       });
   },
 });
+
+export const selectFunctionOption = (state: RootState): FunctionOption =>
+  functionsOptions[state.tabulation.controls.funcKey]!;
 
 export const tabulationReducer = tabulationSlice.reducer;
