@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { Box, CircularProgress } from '@mui/material';
+import { Stack, CircularProgress } from '@mui/material';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import App from '@/App';
@@ -14,18 +14,18 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
       <PersistGate
         loading={
-          <Box
+          <Stack
             position="absolute"
             left="0"
             top="0"
             right="0"
             bottom="0"
-            display="flex"
             alignItems="center"
             justifyContent="center"
+            sx={{ backgroundColor: 'primary.lighter' }}
           >
-            <CircularProgress />
-          </Box>
+            <CircularProgress size="4rem" sx={{ color: 'primary.dark' }} />
+          </Stack>
         }
         persistor={persistor}
       >
