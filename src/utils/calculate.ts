@@ -16,8 +16,8 @@ export const evaluateFunctionResults = (
     y: [],
   };
   for (let x = xStart; x <= xEnd; x += step) {
-    results.x.push(x);
-    results.y.push(funcExecute(x));
+    results.x.push(x.toLocaleString('fullwide'));
+    results.y.push(funcExecute(x).toLocaleString('fullwide'));
   }
   return results;
 };

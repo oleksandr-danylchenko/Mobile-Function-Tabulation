@@ -50,13 +50,13 @@ const Plot: FC = () => {
       columns: [
         {
           latex: 'x',
-          values: results.x as any, // JS will auto convert to string
+          values: results.x,
           dragMode: Desmos.DragModes.NONE,
           color: theme.palette.primary.main,
         },
         {
           latex: 'y',
-          values: results.y as any, // JS will auto convert to string
+          values: results.y,
           dragMode: Desmos.DragModes.NONE,
           color: theme.palette.primary.main,
         },

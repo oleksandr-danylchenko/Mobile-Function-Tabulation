@@ -17,8 +17,8 @@ export interface TabulationControls {
 
 export type TabulationResults = {
   evaluatedAt: number;
-  x: number[];
-  y: number[];
+  x: string[];
+  y: string[];
 };
 
 export interface TabulationState {
