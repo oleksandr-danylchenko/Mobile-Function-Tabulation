@@ -9,11 +9,11 @@ interface Props extends PropsWithChildren {
 
 const PlotOverlay: FC<Props> = (props) => {
   const { isEditing, isEvaluating, children } = props;
-
   const isInert = isEditing || isEvaluating;
 
   return (
     <Box
+      position="relative"
       flex={1}
       sx={{
         pointerEvents: isInert ? 'none' : 'auto', // Helps to move focus from inputs

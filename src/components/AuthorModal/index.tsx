@@ -32,7 +32,7 @@ const AuthorModal: FC = () => {
           position: 'absolute',
           left: 10,
           top: 10,
-          zIndex: 1,
+          zIndex: 2,
         }}
         color="inherit"
         onClick={toggleOpen}
