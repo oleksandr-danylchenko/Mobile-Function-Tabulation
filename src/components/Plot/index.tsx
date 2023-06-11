@@ -42,8 +42,7 @@ const Plot: FC = () => {
     if (!calculator) return;
     if (!results || results?.evaluatedAt === prevEvaluatedAt) return;
 
-    const expressionId = 'tabulation-expression';
-    calculator.removeExpression({ id: expressionId });
+    const expressionId = `tabulation-expression-${results?.evaluatedAt}`;
     calculator.setExpression({
       id: expressionId,
       type: 'table',
@@ -62,6 +61,9 @@ const Plot: FC = () => {
         },
       ],
     });
+
+    const prevExpressionId = `tabulation-expression-${prevEvaluatedAt}`;
+    calculator.removeExpression({ id: prevExpressionId });
   }, [calculator, prevEvaluatedAt, results, theme.palette.primary.main]);
 
   return <Box ref={renderDesmos} css={[desmosStyle, fullParent]} />;
