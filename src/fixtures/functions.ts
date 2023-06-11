@@ -2,6 +2,10 @@ import { keyBy } from 'lodash';
 
 export enum FunctionKey {
   X_SQUARED,
+  X_CUBED,
+  X_ROOTED,
+  SIN_X,
+  COS_X,
   ONE_OVER_X,
 }
 
@@ -18,6 +22,30 @@ export const functionOptions: Array<FunctionOption> = [
     label: 'x^2',
     latex: 'x^2',
     execute: (x) => x ** 2,
+  },
+  {
+    key: FunctionKey.X_CUBED,
+    label: 'x^3',
+    latex: 'x^3',
+    execute: (x) => x ** 3,
+  },
+  {
+    key: FunctionKey.X_ROOTED,
+    label: '√x',
+    latex: '√x',
+    execute: (x) => Math.sqrt(x),
+  },
+  {
+    key: FunctionKey.SIN_X,
+    label: 'sin(x)',
+    latex: 'sin(x)',
+    execute: (x) => Math.sin(x),
+  },
+  {
+    key: FunctionKey.COS_X,
+    label: 'cos(x)',
+    latex: 'cos(x)',
+    execute: (x) => Math.cos(x),
   },
   {
     key: FunctionKey.ONE_OVER_X,

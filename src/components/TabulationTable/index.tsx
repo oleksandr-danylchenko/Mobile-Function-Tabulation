@@ -27,7 +27,7 @@ const TableComponents: TableComponents<
 const TabulationTable: FC = () => {
   const zippedResults = useAppSelector(selectZippedResults);
   return (
-    <Stack flex={1} px={7} pt={2}>
+    <Stack flex={1} pl={7} pt={2}>
       <TableVirtuoso
         data={zippedResults}
         components={TableComponents}
