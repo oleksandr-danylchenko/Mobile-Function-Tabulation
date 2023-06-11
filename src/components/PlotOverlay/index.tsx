@@ -13,7 +13,6 @@ const PlotOverlay: FC<Props> = (props) => {
 
   return (
     <Box
-      position="relative"
       flex={1}
       sx={{
         pointerEvents: isInert ? 'none' : 'auto', // Helps to move focus from inputs

@@ -1,12 +1,14 @@
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useRef } from 'react';
 
 import { Stack } from '@mui/material';
+import { isEqual } from 'lodash';
 import { useToggle } from 'usehooks-ts';
 
 import ArgsControls from '@/components/ArgsControls';
 import AuthorModal from '@/components/AuthorModal';
 import Plot from '@/components/Plot';
 import PlotOverlay from '@/components/PlotOverlay';
+import { usePreviousRender } from '@/hooks';
 import { evaluateFunc, reevaluateFunc } from '@/store/actions/tabulation';
 import { TabulationControls } from '@/store/slices/tabulationSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -18,26 +20,39 @@ const Home: FC = () => {
 
   const isEvaluating = useAppSelector((state) => state.tabulation.isEvaluating);
   const results = useAppSelector((state) => state.tabulation.results);
+  const prevEvaluatedAt = usePreviousRender(results?.evaluatedAt);
+
+  const evaluationPromiseRef = useRef<any>(null);
 
   useEffect(() => {
     if (!results) {
-      dispatch(evaluateFunc());
+      evaluationPromiseRef.current = dispatch(evaluateFunc());
     }
   }, [dispatch, results]);
 
-  const [isEditing, toggleEditing] = useToggle();
+  const [isControlsEditing, toggleEditing] = useToggle();
   const handleControlsBlur = useCallback(
     (newControls: TabulationControls) => {
       toggleEditing();
-      dispatch(reevaluateFunc(newControls));
+
+      if (!isEqual(controls, newControls)) {
+        evaluationPromiseRef.current?.abort?.(); // Abort ongoing evaluation
+        evaluationPromiseRef.current = dispatch(reevaluateFunc(newControls));
+      }
     },
-    [dispatch, toggleEditing],
+    [controls, dispatch, toggleEditing],
   );
+
+  useEffect(() => {
+    if (results && results.evaluatedAt !== prevEvaluatedAt) {
+      evaluationPromiseRef.current = null; // Prev evaluation is done
+    }
+  }, [prevEvaluatedAt, results]);
 
   return (
     <Stack height="100vh">
       <AuthorModal />
-      <PlotOverlay isEditing={isEditing} isEvaluating={isEvaluating}>
+      <PlotOverlay isEditing={isControlsEditing} isEvaluating={isEvaluating}>
         <Plot />
       </PlotOverlay>
       <ArgsControls

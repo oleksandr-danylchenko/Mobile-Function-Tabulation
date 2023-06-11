@@ -67,5 +67,3 @@ const tabulationSlice = createSlice({
 });
 
 export const tabulationReducer = tabulationSlice.reducer;
-
-// export const { reevaluateFunc } = tabulationSlice.actions;

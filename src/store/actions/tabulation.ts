@@ -18,14 +18,6 @@ export const evaluateFunc = createAppAsyncThunk<TabulationResults, void>(
 export const reevaluateFunc = createAppAsyncThunk<
   TabulationResults,
   TabulationControls
->(
-  'tabulation/reevaluateFunc',
-  async (newControls) =>
-    evaluationWorkerInstance.evaluateFunctionResultsSW(newControls),
-  {
-    condition(newControls, { getState }) {
-      const { controls } = getState().tabulation;
-      return !isEqual(controls, newControls);
-    },
-  },
+>('tabulation/reevaluateFunc', async (newControls) =>
+  evaluationWorkerInstance.evaluateFunctionResultsSW(newControls),
 );
