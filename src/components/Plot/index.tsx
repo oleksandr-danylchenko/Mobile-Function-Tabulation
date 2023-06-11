@@ -4,7 +4,6 @@ import { SerializedStyles } from '@emotion/react';
 import { Box, css, Theme, useTheme } from '@mui/material';
 
 import { MAX_X_BOUNDS, MAX_Y_BOUNDS } from '@/constants';
-import { usePreviousRender } from '@/hooks';
 import { useAppSelector } from '@/store/store';
 import { desmosButton, fullParent } from '@/styles/mixins';
 
@@ -12,7 +11,7 @@ const Plot: FC = () => {
   const theme = useTheme();
 
   const results = useAppSelector((state) => state.tabulation.results);
-  const prevEvaluatedAt = usePreviousRender(results?.evaluatedAt);
+  const [renderedEvaluatedAt, setRenderedEvaluatedAt] = useState<number>();
 
   const [calculator, setCalculator] = useState<Desmos.Calculator | null>(null);
   const renderDesmos = useCallback(
@@ -40,7 +39,10 @@ const Plot: FC = () => {
 
   useEffect(() => {
     if (!calculator) return;
-    if (!results || results?.evaluatedAt === prevEvaluatedAt) return;
+    if (!results || results.evaluatedAt === renderedEvaluatedAt) return;
+
+    const prevEvaluatedAt = renderedEvaluatedAt;
+    setRenderedEvaluatedAt(results.evaluatedAt);
 
     const expressionId = `tabulation-expression-${results?.evaluatedAt}`;
     calculator.setExpression({
@@ -64,7 +66,7 @@ const Plot: FC = () => {
 
     const prevExpressionId = `tabulation-expression-${prevEvaluatedAt}`;
     calculator.removeExpression({ id: prevExpressionId });
-  }, [calculator, prevEvaluatedAt, results, theme.palette.primary.main]);
+  }, [calculator, renderedEvaluatedAt, results, theme.palette.primary.main]);
 
   return <Box ref={renderDesmos} css={[desmosStyle, fullParent]} />;
 };
