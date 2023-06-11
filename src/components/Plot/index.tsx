@@ -3,8 +3,7 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { SerializedStyles } from '@emotion/react';
 import { Box, css, Theme, useTheme } from '@mui/material';
 
-// import Desmos from 'desmos';
-import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
+import { MAX_X_BOUNDS, MAX_Y_BOUNDS } from '@/constants';
 import { usePreviousRender } from '@/hooks';
 import { useAppSelector } from '@/store/store';
 import { desmosButton } from '@/styles/mixins';
@@ -12,9 +11,7 @@ import { desmosButton } from '@/styles/mixins';
 const Plot: FC = () => {
   const theme = useTheme();
 
-  const isEvaluating = useAppSelector((state) => state.tabulation.isEvaluating);
   const results = useAppSelector((state) => state.tabulation.results);
-
   const prevEvaluatedAt = usePreviousRender(results?.evaluatedAt);
 
   const [calculator, setCalculator] = useState<Desmos.Calculator | null>(null);
@@ -27,10 +24,13 @@ const Plot: FC = () => {
           settingsMenu: false,
         });
         renderedCalculator.setMathBounds({
-          left: MAX_DIMENSIONS_BOUNDS,
-          right: MAX_DIMENSIONS_BOUNDS,
+          top: MAX_Y_BOUNDS,
+          bottom: MAX_Y_BOUNDS * -1,
+          left: MAX_X_BOUNDS * -1,
+          right: MAX_X_BOUNDS,
         });
         renderedCalculator.removeExpression({ id: '1' }); // Clear state entirely
+        renderedCalculator.setBlank();
 
         setCalculator(renderedCalculator);
       }

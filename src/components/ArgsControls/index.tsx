@@ -9,7 +9,7 @@ import {
 import { ClassNames, css } from '@emotion/react';
 import { Stack } from '@mui/material';
 
-import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
+import { MAX_X_BOUNDS } from '@/constants';
 import { functionOptions } from '@/fixtures/functions';
 import { TabulationControls } from '@/store/slices/tabulationSlice';
 import { fullWidth } from '@/styles/mixins';
@@ -29,13 +29,13 @@ const ArgsControls: FC<Props> = (props) => {
   const { handleSubmit, watch } = argsFormContext;
 
   const xStartInputProps = {
-    min: MAX_DIMENSIONS_BOUNDS * -1,
+    min: MAX_X_BOUNDS * -1,
     max: watch('xEnd'),
     step: 0.1,
   };
   const xEndInputProps = {
     min: watch('xStart'),
-    max: MAX_DIMENSIONS_BOUNDS,
+    max: MAX_X_BOUNDS,
     step: 0.1,
   };
   const stepInputProps = {
