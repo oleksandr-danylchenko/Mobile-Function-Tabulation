@@ -1,14 +1,13 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import {
   TabulationControls,
   TabulationResults,
 } from '@/store/slices/tabulationSlice';
+import { createAppAsyncThunk } from '@/store/store';
 import { evaluationWorkerInstance } from '@/webWorkers/evaluation/instance';
 
-export const reevaluateFunc = createAsyncThunk<
+export const reevaluateFunc = createAppAsyncThunk<
   TabulationResults,
   TabulationControls
->('tabulation/reevaluateFunc', async (controls) =>
-  evaluationWorkerInstance.evaluateFunctionResultsSW(controls),
+>('tabulation/reevaluateFunc', async (newControls) =>
+  evaluationWorkerInstance.evaluateFunctionResultsSW(newControls),
 );

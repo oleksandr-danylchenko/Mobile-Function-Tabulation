@@ -8,6 +8,7 @@ import {
 
 import { ClassNames, css } from '@emotion/react';
 import { Stack } from '@mui/material';
+import { isEqual } from 'lodash';
 
 import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
 import { functionOptions } from '@/fixtures/functions';
@@ -26,8 +27,10 @@ const ArgsControls: FC = () => {
     mode: 'onBlur',
   });
   const { handleSubmit } = argsFormContext;
-  const handleFormBlur = (data: TabulationControls): void => {
-    dispatch(reevaluateFunc(data));
+  const handleFormBlur = (newControls: TabulationControls): void => {
+    if (!isEqual(controls, newControls)) {
+      dispatch(reevaluateFunc(newControls));
+    }
   };
 
   const xStartInputProps = {
