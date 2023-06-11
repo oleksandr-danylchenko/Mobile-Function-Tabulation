@@ -39,8 +39,9 @@
     "test:e2e:headless": "pnpm preview:test 'cypress run'",
     "test:e2e:ci": "vite build && pnpm preview:test 'cypress run --record'",
     "generate-icons": "pnpm capacitor-assets generate",
-    "build-android": "pnpm build && pnpm cap sync android --no-build",
-    "run-dev-android": "pnpm cap run android -l --external"
+    "build-android": "ionic cap build android --no-open --prod",
+    "open-android-app": "ionic cap open android",
+    "run-dev-android": "ionic cap run android -l --external"
   },
   "dependencies": {
     "@capacitor/android": "^5.0.4",

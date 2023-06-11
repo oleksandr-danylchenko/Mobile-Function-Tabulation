@@ -1,0 +1,7 @@
+{
+  "name": "Mobile Function Tabulation",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
