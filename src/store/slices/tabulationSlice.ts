@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isFulfilled, isPending } from '@reduxjs/toolkit';
 
 import { FunctionKey } from '@/fixtures/functions';
-import { reevaluateFunc } from '@/store/actions/tabulation';
+import { evaluateFunc, reevaluateFunc } from '@/store/actions/tabulation';
 
 export interface TabulationControls {
   funcKey: FunctionKey;
@@ -39,14 +39,20 @@ const tabulationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(reevaluateFunc.pending, (state, action) => {
-      state.isEvaluating = true;
-      Object.assign(state, action.meta.arg);
-    });
-    builder.addCase(reevaluateFunc.fulfilled, (state, action) => {
-      state.isEvaluating = false;
-      state.results = action.payload;
-    });
+    builder
+      .addCase(reevaluateFunc.pending, (state, action) => {
+        Object.assign(state, action.meta.arg);
+      })
+      .addMatcher(isPending(evaluateFunc, reevaluateFunc), (state) => {
+        state.isEvaluating = true;
+      })
+      .addMatcher(
+        isFulfilled(evaluateFunc, reevaluateFunc),
+        (state, action) => {
+          state.isEvaluating = false;
+          state.results = action.payload;
+        },
+      );
   },
 });
 
