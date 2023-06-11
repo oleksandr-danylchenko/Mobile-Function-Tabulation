@@ -2,18 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import App from './App';
+import { Box, CircularProgress } from '@mui/material';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import store from '@/store/store';
+import App from '@/App';
+import store, { persistor } from '@/store/store';
 import { AppThemeProvider } from '@/styles/AppThemeProvider';
-import './main.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <AppThemeProvider>
-        <App />
-      </AppThemeProvider>
+      <PersistGate
+        loading={
+          <Box
+            position="absolute"
+            left="0"
+            top="0"
+            right="0"
+            bottom="0"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <CircularProgress />
+          </Box>
+        }
+        persistor={persistor}
+      >
+        <AppThemeProvider>
+          <App />
+        </AppThemeProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 );
