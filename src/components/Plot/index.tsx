@@ -36,6 +36,11 @@ const Plot: FC = () => {
 
         setCalculator(renderedCalculator);
       }
+
+      if (!el && calculator) {
+        calculator.destroy();
+        setCalculator(null);
+      }
     },
     [calculator],
   );
