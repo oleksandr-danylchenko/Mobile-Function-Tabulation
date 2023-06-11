@@ -1,5 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
+import { Box } from '@mui/material';
+
 interface Props extends PropsWithChildren {
   isEditing: boolean;
   isEvaluating: boolean;
@@ -7,7 +9,19 @@ interface Props extends PropsWithChildren {
 
 const PlotOverlay: FC<Props> = (props) => {
   const { isEditing, isEvaluating, children } = props;
-  return <>{children}</>;
+
+  const isInert = isEditing || isEvaluating;
+
+  return (
+    <Box
+      flex={1}
+      sx={{
+        pointerEvents: isInert ? 'none' : 'auto', // Helps to move focus from inputs
+      }}
+    >
+      {children}
+    </Box>
+  );
 };
 
 export default PlotOverlay;

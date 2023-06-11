@@ -6,7 +6,7 @@ import { Box, css, Theme, useTheme } from '@mui/material';
 import { MAX_X_BOUNDS, MAX_Y_BOUNDS } from '@/constants';
 import { usePreviousRender } from '@/hooks';
 import { useAppSelector } from '@/store/store';
-import { desmosButton } from '@/styles/mixins';
+import { desmosButton, fullParent } from '@/styles/mixins';
 
 const Plot: FC = () => {
   const theme = useTheme();
@@ -64,7 +64,7 @@ const Plot: FC = () => {
     });
   }, [calculator, prevEvaluatedAt, results, theme.palette.primary.main]);
 
-  return <Box ref={renderDesmos} css={desmosStyle} flex={1} />;
+  return <Box ref={renderDesmos} css={[desmosStyle, fullParent]} />;
 };
 
 const desmosStyle = (theme: Theme): SerializedStyles => css`
