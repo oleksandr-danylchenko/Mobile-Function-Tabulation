@@ -1,7 +1,17 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { PersistConfig, persistReducer, persistStore } from 'redux-persist';
+import {
+  PersistConfig,
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
 import { deleteTextFile, readTextFile, saveTextFile } from '@/filesystem';
 import {
@@ -37,6 +47,12 @@ const combinedReducer = combineReducers({
 
 const store = configureStore({
   reducer: combinedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
   devTools: {
     stateSanitizer: (state: any) => ({
       ...state,
