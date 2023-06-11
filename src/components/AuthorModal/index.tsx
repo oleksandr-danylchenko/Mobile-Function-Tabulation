@@ -12,12 +12,13 @@ import {
 } from '@mui/material';
 import { useToggle } from 'usehooks-ts';
 
-import avatar_compressed from '@/assets/avatar_compressed.jpeg';
+import avatar_img from '@/assets/avatar_compressed.jpeg';
+// import avatar_img from '@/assets/avatar_2.jpg';
 import { absoluteCenter, desmosButton } from '@/styles/mixins';
 
 const authorData = {
   name: 'Oleksandr Danylchenko',
-  avatarUrl: avatar_compressed,
+  avatarUrl: avatar_img,
 };
 
 const AuthorModal: FC = () => {
