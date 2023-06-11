@@ -11,32 +11,38 @@ import { Stack } from '@mui/material';
 
 import { MAX_DIMENSIONS_BOUNDS } from '@/constants';
 import { functionOptions } from '@/fixtures/functions';
-import { reevaluateFunc } from '@/store/actions/tabulation';
 import { TabulationControls } from '@/store/slices/tabulationSlice';
-import { useAppDispatch, useAppSelector } from '@/store/store';
 import { fullWidth } from '@/styles/mixins';
 
-const ArgsControls: FC = () => {
-  const dispatch = useAppDispatch();
-  const controls = useAppSelector((state) => state.tabulation.controls);
-  const { xStart, xEnd } = controls;
+interface Props {
+  defaultValues: TabulationControls;
+  onBlur: (newControls: TabulationControls) => void;
+}
+
+const ArgsControls: FC<Props> = (props) => {
+  const { defaultValues, onBlur } = props;
 
   const argsFormContext = useForm<TabulationControls>({
-    defaultValues: controls,
+    defaultValues,
     mode: 'onBlur',
   });
-  const { handleSubmit } = argsFormContext;
-  const handleFormBlur = (newControls: TabulationControls): void => {
-    dispatch(reevaluateFunc(newControls));
-  };
+  const { handleSubmit, watch } = argsFormContext;
 
   const xStartInputProps = {
     min: MAX_DIMENSIONS_BOUNDS * -1,
-    max: xEnd,
+    max: watch('xEnd'),
     step: 0.1,
   };
-  const xEndInputProps = { min: xStart, max: MAX_DIMENSIONS_BOUNDS, step: 0.1 };
-  const stepInputProps = { min: 0.0001, max: xEnd - xStart, step: 0.01 };
+  const xEndInputProps = {
+    min: watch('xStart'),
+    max: MAX_DIMENSIONS_BOUNDS,
+    step: 0.1,
+  };
+  const stepInputProps = {
+    min: 0.0001,
+    max: watch('xEnd') - watch('xStart'),
+    step: 0.01,
+  };
 
   return (
     <ClassNames>
@@ -44,7 +50,7 @@ const ArgsControls: FC = () => {
         <FormContainer
           formContext={argsFormContext}
           FormProps={{
-            onBlur: handleSubmit(handleFormBlur), // Sends even only after successful validation
+            onBlur: handleSubmit(onBlur), // Sends even only after successful validation
             className: css`
               display: flex;
               align-items: center;
