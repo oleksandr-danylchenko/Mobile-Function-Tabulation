@@ -1,5 +1,3 @@
-import { isEqual } from 'lodash';
-
 import { createAppAsyncThunk } from '@/store/actions/index';
 import {
   TabulationControls,
@@ -12,12 +10,16 @@ export const evaluateFunc = createAppAsyncThunk<TabulationResults, void>(
   async (_, thunkAPI) =>
     evaluationWorkerInstance.evaluateFunctionResultsSW(
       thunkAPI.getState().tabulation.controls,
+      thunkAPI.signal,
     ),
 );
 
 export const reevaluateFunc = createAppAsyncThunk<
   TabulationResults,
   TabulationControls
->('tabulation/reevaluateFunc', async (newControls) =>
-  evaluationWorkerInstance.evaluateFunctionResultsSW(newControls),
+>('tabulation/reevaluateFunc', async (newControls, thunkAPI) =>
+  evaluationWorkerInstance.evaluateFunctionResultsSW(
+    newControls,
+    thunkAPI.signal,
+  ),
 );
