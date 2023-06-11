@@ -16,11 +16,12 @@ import { fullWidth } from '@/styles/mixins';
 
 interface Props {
   defaultValues: TabulationControls;
+  onFocus: () => void;
   onBlur: (newControls: TabulationControls) => void;
 }
 
 const ArgsControls: FC<Props> = (props) => {
-  const { defaultValues, onBlur } = props;
+  const { defaultValues, onFocus, onBlur } = props;
 
   const argsFormContext = useForm<TabulationControls>({
     defaultValues,
@@ -50,6 +51,7 @@ const ArgsControls: FC<Props> = (props) => {
         <FormContainer
           formContext={argsFormContext}
           FormProps={{
+            onFocus,
             onBlur: handleSubmit(onBlur), // Sends even only after successful validation
             className: css`
               display: flex;
