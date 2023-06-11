@@ -18,6 +18,7 @@ import {
   tabulationReducer,
   TabulationState,
 } from '@/store/slices/tabulationSlice';
+import { uiReducer } from '@/store/slices/ui';
 
 const createFilesystemPersistConfig: <T>(
   key: string,
@@ -39,6 +40,7 @@ const createFilesystemPersistConfig: <T>(
 };
 
 const combinedReducer = combineReducers({
+  ui: uiReducer,
   tabulation: persistReducer(
     createFilesystemPersistConfig<TabulationState>('tabulationState'),
     tabulationReducer,

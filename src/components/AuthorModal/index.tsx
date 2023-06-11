@@ -28,12 +28,6 @@ const AuthorModal: FC = () => {
       <Button
         css={desmosButton}
         aria-label="Show author info"
-        sx={{
-          position: 'absolute',
-          left: 10,
-          top: 10,
-          zIndex: 2,
-        }}
         color="inherit"
         onClick={toggleOpen}
       >

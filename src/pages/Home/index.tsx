@@ -8,6 +8,8 @@ import ArgsControls from '@/components/ArgsControls';
 import AuthorModal from '@/components/AuthorModal';
 import Plot from '@/components/Plot';
 import PlotOverlay from '@/components/PlotOverlay';
+import StaticButtonsContainer from '@/components/StaticButtonsContainer';
+import TabulationViewToggle from '@/components/TabulationViewToggle';
 import { usePreviousRender } from '@/hooks';
 import { evaluateFunc, reevaluateFunc } from '@/store/actions/tabulation';
 import { TabulationControls } from '@/store/slices/tabulationSlice';
@@ -51,7 +53,11 @@ const Home: FC = () => {
 
   return (
     <Stack height="100vh">
-      <AuthorModal />
+      <StaticButtonsContainer>
+        <AuthorModal />
+        <TabulationViewToggle />
+      </StaticButtonsContainer>
+
       <PlotOverlay isEditing={isControlsEditing} isEvaluating={isEvaluating}>
         <Plot />
       </PlotOverlay>
