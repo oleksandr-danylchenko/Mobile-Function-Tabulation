@@ -1,3 +1,5 @@
+import { isEqual } from 'lodash';
+
 import { createAppAsyncThunk } from '@/store/actions/index';
 import {
   TabulationControls,
@@ -16,6 +18,14 @@ export const evaluateFunc = createAppAsyncThunk<TabulationResults, void>(
 export const reevaluateFunc = createAppAsyncThunk<
   TabulationResults,
   TabulationControls
->('tabulation/reevaluateFunc', async (newControls) =>
-  evaluationWorkerInstance.evaluateFunctionResultsSW(newControls),
+>(
+  'tabulation/reevaluateFunc',
+  async (newControls) =>
+    evaluationWorkerInstance.evaluateFunctionResultsSW(newControls),
+  {
+    condition(newControls, { getState }) {
+      const { controls } = getState().tabulation;
+      return !isEqual(controls, newControls);
+    },
+  },
 );

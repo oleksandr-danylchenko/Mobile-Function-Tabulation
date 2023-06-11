@@ -1,4 +1,9 @@
-import { createSlice, isFulfilled, isPending } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit';
 
 import { FunctionKey } from '@/fixtures/functions';
 import { evaluateFunc, reevaluateFunc } from '@/store/actions/tabulation';
@@ -52,7 +57,12 @@ const tabulationSlice = createSlice({
           state.isEvaluating = false;
           state.results = action.payload;
         },
-      );
+      )
+      .addMatcher(isRejected(evaluateFunc, reevaluateFunc), (state, action) => {
+        if (!action.meta.condition) {
+          state.isEvaluating = false;
+        }
+      });
   },
 });
 
