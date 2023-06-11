@@ -23,8 +23,10 @@ export const functionOptions: Array<FunctionOption> = [
     key: FunctionKey.ONE_OVER_X,
     label: '1/x',
     latex: '1/x',
-    execute: (x) => 1 / x,
+    execute: (x) => (isEpsilonZero(x) ? NaN : 1 / x),
   },
 ];
+
+const isEpsilonZero = (x: number): boolean => Math.abs(x) < 1e-10;
 
 export const functionsOptions = keyBy(functionOptions, 'key');

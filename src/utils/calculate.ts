@@ -17,7 +17,9 @@ export const evaluateFunctionResults = (
   };
   for (let x = xStart; x <= xEnd; x += step) {
     results.x.push(x.toLocaleString('fullwide'));
-    results.y.push(funcExecute(x).toLocaleString('fullwide'));
+
+    const y = funcExecute(x);
+    results.y.push(isNaN(y) ? 'Ø' : y.toLocaleString('fullwide'));
   }
   return results;
 };
