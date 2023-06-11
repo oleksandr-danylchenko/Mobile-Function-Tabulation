@@ -18,7 +18,7 @@ import {
   tabulationReducer,
   TabulationState,
 } from '@/store/slices/tabulationSlice';
-import { uiReducer } from '@/store/slices/ui';
+import { uiReducer } from '@/store/slices/uiSlice';
 
 const createFilesystemPersistConfig: <T>(
   key: string,

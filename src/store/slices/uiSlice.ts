@@ -26,4 +26,6 @@ const uiSlice = createSlice({
   },
 });
 
+export const { toggleView } = uiSlice.actions;
+
 export const uiReducer = uiSlice.reducer;
