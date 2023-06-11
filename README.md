@@ -1,70 +1,7 @@
-## vite-mui-ts boilerplate
+# Laboratory work for the Mobile Dev course, 2023
 
-TypeScript + React + Redux + MUI + RRD + ESLint + Prettier
+## Ionic Capacitor + Vite + React + Redux + MUI
 
-[![vite-mui-ts](https://iili.io/HY1orrl.md.png)](https://freeimage.host/i/HY1orrl)
+### Demo:
 
-### Getting Started
-
-#### Clone the repo
-
-```
-npx degit emre-cil/vite-mui-ts my-app
-```
-
-```
-cd my-app
-```
-
-#### Install Dependencies
-
-```
-pnpm install
-```
-
-#### Run
-
-```
-pnpm dev
-```
-
-#### Paths
-
-Application using absolute paths
-Example: '@/components/Index/Index';
-
-if you don't want to use you can remove these lines from
-
-> vite.config.ts
-
-```
- resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  },
-```
-
-> tsconfig.json
-
-```
-"paths": {
-      "@/*": ["./*"]
-    }
-```
-
-
-### Scripts
-
-| Script        | Description                        |
-| ------------- | ---------------------------------- |
-| pnpm dev      | Runs the application.              |
-| pnpm build    | Create builds for the application. |
-| pnpm preview  | Runs the Vite preview              |
-| pnpm lint     | Display eslint errors              |
-| pnpm lint:fix | Fix the eslint errors              |
-| pnpm format   | Runs prettier for all files        |
-| pnpm test     | Run tests                          |
-
-### Check List
-````
+https://github.com/oleksandr-danylchenko/Mobile-Function-Tabulation/assets/68850090/db13e191-632f-4d5f-83f5-90ac2dd75624
