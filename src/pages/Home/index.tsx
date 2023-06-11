@@ -9,14 +9,18 @@ import AuthorModal from '@/components/AuthorModal';
 import Plot from '@/components/Plot';
 import PlotOverlay from '@/components/PlotOverlay';
 import StaticButtonsContainer from '@/components/StaticButtonsContainer';
+import TabulationTable from '@/components/TabulationTable';
 import TabulationViewToggle from '@/components/TabulationViewToggle';
 import { usePreviousRender } from '@/hooks';
 import { evaluateFunc, reevaluateFunc } from '@/store/actions/tabulation';
 import { TabulationControls } from '@/store/slices/tabulationSlice';
+import { TabulationView } from '@/store/slices/uiSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
+
+  const tabulationView = useAppSelector((state) => state.ui.tabulationView);
 
   const controls = useAppSelector((state) => state.tabulation.controls);
 
@@ -57,10 +61,13 @@ const Home: FC = () => {
         <AuthorModal />
         <TabulationViewToggle />
       </StaticButtonsContainer>
-
-      <PlotOverlay isEditing={isControlsEditing} isEvaluating={isEvaluating}>
-        <Plot />
-      </PlotOverlay>
+      {tabulationView === TabulationView.PLOT ? (
+        <PlotOverlay isEditing={isControlsEditing} isEvaluating={isEvaluating}>
+          <Plot />
+        </PlotOverlay>
+      ) : (
+        <TabulationTable />
+      )}
       <ArgsControls
         defaultValues={controls}
         onFocus={toggleEditing}
