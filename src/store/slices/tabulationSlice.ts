@@ -1,9 +1,11 @@
 import {
+  createSelector,
   createSlice,
   isFulfilled,
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
+import { zipWith } from 'lodash';
 
 import {
   FunctionKey,
@@ -73,5 +75,16 @@ const tabulationSlice = createSlice({
 
 export const selectFunctionOption = (state: RootState): FunctionOption =>
   functionsOptions[state.tabulation.controls.funcKey]!;
+
+export const selectZippedResults = createSelector(
+  (state: RootState) => state.tabulation.results,
+  (results) =>
+    results
+      ? zipWith(results?.x, results?.y, (xi, yi) => ({
+          x: xi,
+          y: yi,
+        }))
+      : [],
+);
 
 export const tabulationReducer = tabulationSlice.reducer;
