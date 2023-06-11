@@ -10,16 +10,12 @@ export const evaluateFunc = createAppAsyncThunk<TabulationResults, void>(
   async (_, thunkAPI) =>
     evaluationWorkerInstance.evaluateFunctionResultsSW(
       thunkAPI.getState().tabulation.controls,
-      thunkAPI.signal,
     ),
 );
 
 export const reevaluateFunc = createAppAsyncThunk<
   TabulationResults,
   TabulationControls
->('tabulation/reevaluateFunc', async (newControls, thunkAPI) =>
-  evaluationWorkerInstance.evaluateFunctionResultsSW(
-    newControls,
-    thunkAPI.signal,
-  ),
+>('tabulation/reevaluateFunc', async (newControls) =>
+  evaluationWorkerInstance.evaluateFunctionResultsSW(newControls),
 );
